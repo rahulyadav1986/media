@@ -8,7 +8,7 @@ import { enviourment } from 'next.config';
 import CircleRating from '@/components/shared/circleRating/circleRating';
 import { useEffect, useState } from 'react';
 import { MovieSkeletonCard } from '@/components/shared/skeletons/skeletons';
-const MovieNowPlaying = ({HeroData})=>{
+const MovieNowPlaying = ({MoviePopularData})=>{
     const [loading, setLoading] = useState(false);
     useEffect(()=>{
         setTimeout(() => setLoading(true), 2000);
@@ -30,7 +30,7 @@ const MovieNowPlaying = ({HeroData})=>{
                         </div>
                         <div className={`${styles.details_area} d-flex scroll_area`}>
                             {
-                                HeroData.results.slice(6,18).map((item,i)=>{
+                                MoviePopularData.results.slice(1,10).map((item,i)=>{
                                     const ratingava = ()=>{
                                         return(
                                             item.vote_average * 10

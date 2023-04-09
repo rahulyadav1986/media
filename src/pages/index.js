@@ -20,7 +20,7 @@ const Home = ({HeroData, MoviePopularData, MovieUpcomingData, responssMovieTopRa
       <MoviePopular MoviePopularData={MoviePopularData} />
       <MovieUpcoming MovieUpcomingData={MovieUpcomingData} />
       <MovieLatest HeroData={HeroData} />
-      <MovieNowPlaying HeroData={HeroData} />
+      <MovieNowPlaying MoviePopularData={MoviePopularData} />
       <MovieTopRated responssMovieTopRatedData={responssMovieTopRatedData} />
       
     </>
