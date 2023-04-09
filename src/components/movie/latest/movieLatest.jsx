@@ -24,7 +24,7 @@ const MovieLatest = ({HeroData})=>{
                             />
                         </div>
                         <div className={`${styles.details_tab_section_area} d-flex justify-content-between`}>
-                            <div>
+                            <div className={styles.tab_content_wrapper}>
                                 {
                                     HeroData.results.slice(5,15).map((item,i)=>{
                                         return(
