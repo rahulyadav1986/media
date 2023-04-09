@@ -5,6 +5,7 @@ import MoviePopular from '@/components/movie/popular/moviePopular';
 import MovieUpcoming from '@/components/movie/upcoming/movieUpcoming';
 import MovieNowPlaying from '@/components/movie/nowPlaying/movieNowPlaying';
 import MovieTopRated from '@/components/movie/topRated/movieTopRated';
+import MovieLatest from '@/components/movie/latest/movieLatest';
 
 const Home = ({HeroData, MoviePopularData, MovieUpcomingData, responssMovieTopRatedData})=>{
   return (
@@ -18,6 +19,7 @@ const Home = ({HeroData, MoviePopularData, MovieUpcomingData, responssMovieTopRa
       <Hero HeroData={HeroData} />
       <MoviePopular MoviePopularData={MoviePopularData} />
       <MovieUpcoming MovieUpcomingData={MovieUpcomingData} />
+      <MovieLatest HeroData={HeroData} />
       <MovieNowPlaying HeroData={HeroData} />
       <MovieTopRated responssMovieTopRatedData={responssMovieTopRatedData} />
       
