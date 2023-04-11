@@ -17,4 +17,16 @@ const HeadingLink = (props)=>{
     )
 }
 
-export default HeadingLink
+const OnlyHeading = (props)=>{
+    return(
+        <>
+            <div className={styles.heading_wrapper}>
+                <h2>{props.mainTitle}<br /> <span>{props.extraText}</span> <span className={styles.highlight}>{props.highlightedTtile}</span></h2>
+                <p>{props.descriptionText}</p>                
+            </div>
+        </>
+    )
+}
+
+
+export {HeadingLink, OnlyHeading}

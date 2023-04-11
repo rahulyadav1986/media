@@ -1,4 +1,4 @@
-import HeadingLink from "@/components/shared/headingLink/headingLink";
+import {HeadingLink} from "@/components/shared/headingLink/headingLink";
 import MainContainer from "@/components/shared/mainContainer/mainContainer";
 import styles from './style.module.scss'
 import Image from "next/image";

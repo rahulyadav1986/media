@@ -15,13 +15,19 @@
         .details_area{
             flex: 0 0 65.468%;
             width: 65.468%;
-            padding-left: 20px;
-            padding-top: 20px;
+            padding-top: 0;
+            padding-left: 0;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
             img{
                 width: 100% !important;
             }
+            .card_wrapper{
+                width: 100%;
+                flex: 0 0 100%;
+                padding: 4rem 2rem 0 2rem;
+            }
+            
             
         }
     }
@@ -35,10 +41,12 @@
                 width: 100%;
                 height: auto;
                 margin-bottom: 5rem;
+                order: 1;
             }
             .details_area{
                 flex: 0 0 100%;
                 width: 100%;
+                order: 2;
             }
         }
     }

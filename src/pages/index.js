@@ -30,7 +30,7 @@ const Home = ({HeroData, MoviePopularData, MovieUpcomingData, responssMovieTopRa
 export default Home;
 
 export async function getServerSideProps(){
-  const responseHero = await fetch(`${enviourment.apiUrl}/movie/now_playing?api_key=${enviourment.tmdbApiKey}`);
+  const responseHero = await fetch(`${enviourment.apiUrl}/movie/now_playing?api_key=${enviourment.tmdbApiKey}&page=1`);
   const HeroData = await responseHero.json();
   
   const responssMoviePopular = await fetch(`${enviourment.apiUrl}/movie/popular?api_key=${enviourment.tmdbApiKey}`);
