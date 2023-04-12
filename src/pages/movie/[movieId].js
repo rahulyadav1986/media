@@ -33,7 +33,7 @@ const PopularDetails = ({MovieDetails, MovieDetailsTrailer, MovieDetailsKeywords
                 <MainContainer>
                     <div className="main_area_content d-flex justify-content-between">
                         <div className="movie_avator_back">
-                            <Image src={`${enviourment.image_base_url}/w400${MovieDetails.poster_path}`} fill={true}  />
+                            <Image alt={MovieDetails.title} src={`${enviourment.image_base_url}/w400${MovieDetails.poster_path}`} fill={true}  />
                         </div>
                         <div className="content_area d-flex flex-column">
                             <h1>{MovieDetails.title}</h1>
