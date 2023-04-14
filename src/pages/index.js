@@ -7,7 +7,7 @@ import MovieNowPlaying from '@/components/movie/nowPlaying/movieNowPlaying';
 import MovieTopRated from '@/components/movie/topRated/movieTopRated';
 import MovieLatest from '@/components/movie/latest/movieLatest';
 
-const Home = ({HeroData, MoviePopularData, MovieUpcomingData, responssMovieTopRatedData})=>{
+const Home = ({HeroData, MoviePopularData, MovieUpcomingData, MovieTopRatedData})=>{
   return (
     <>
       <Head>
@@ -21,7 +21,7 @@ const Home = ({HeroData, MoviePopularData, MovieUpcomingData, responssMovieTopRa
       <MovieUpcoming MovieUpcomingData={MovieUpcomingData} />
       <MovieLatest HeroData={HeroData} />
       <MovieNowPlaying MoviePopularData={MoviePopularData} />
-      <MovieTopRated responssMovieTopRatedData={responssMovieTopRatedData} />
+      <MovieTopRated MovieTopRatedData={MovieTopRatedData} />
       
     </>
   )
@@ -40,14 +40,14 @@ export async function getServerSideProps(){
   const MovieUpcomingData = await responssMovieUpcoming.json();
 
   const responssMovieTopRated = await fetch(`${enviourment.apiUrl}/movie/top_rated?api_key=${enviourment.tmdbApiKey}`);
-  const responssMovieTopRatedData = await responssMovieTopRated.json();
+  const MovieTopRatedData = await responssMovieTopRated.json();
   
   return{
     props:{
       HeroData: HeroData,
       MoviePopularData: MoviePopularData,
       MovieUpcomingData: MovieUpcomingData,
-      responssMovieTopRatedData: responssMovieTopRatedData
+      MovieTopRatedData: MovieTopRatedData
     }
   }
 }

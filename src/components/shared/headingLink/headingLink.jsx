@@ -10,7 +10,7 @@ const HeadingLink = (props)=>{
                 <p>{props.descriptionText}</p>                
             </div>
             <Link className="global_button small" href={props.src}>
-                <Image src="/images/btn_arrow.png" fill={true} alt="icon"></Image>
+                <Image loading="lazy" src="/images/btn_arrow.png" fill={true} alt="icon"></Image>
                 {props.buttonText}
             </Link>
         </>

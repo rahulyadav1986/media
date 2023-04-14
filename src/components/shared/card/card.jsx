@@ -6,12 +6,12 @@ const Card = ({item})=>{
         <>
             <div className={styles.card_wrapper}>
                 <div className={styles.image_wrapper}>
-                    <Link href=""><Image src={`${enviourment.image_base_url}/w300${item.poster_path}`} fill={true} alt="" /></Link>
+                    <Link href=""><Image loading="lazy" src={`${enviourment.image_base_url}/w300${item.poster_path}`} fill={true} alt="" /></Link>
                 </div>
                 <Link href=""><h3>{item.title}</h3></Link>
                 <ul className={`${styles.widget} d-flex justify-content-between`}>
-                    <li className='d-flex align-items-center'><Image src="/images/star.png" fill={true} alt="icon" /> {item.vote_average}/10</li>
-                    <li className='d-flex align-items-center'><Image alt="icon" src="/images/like.png" fill={true} /> {item.vote_count}</li>
+                    <li className='d-flex align-items-center'><Image loading="lazy" src="/images/star.png" fill={true} alt="icon" /> {item.vote_average}/10</li>
+                    <li className='d-flex align-items-center'><Image loading="lazy" alt="icon" src="/images/like.png" fill={true} /> {item.vote_count}</li>
                 </ul>
             </div>
             

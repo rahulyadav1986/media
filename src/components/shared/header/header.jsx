@@ -13,7 +13,7 @@ const Header = ()=>{
                     <div className={`${styles.details} d-flex align-items-center justify-content-between`}>
                         <div className='d-flex align-items-center'>
                             <div className={styles.logo}>
-                                <Link href="/"><Image alt="Madia" src="/images/logo.png" fill={true} /></Link>
+                                <Link href="/"><Image loading="lazy" alt="Madia" src="/images/logo.png" fill={true} /></Link>
                             </div>
                             <Searchbar />
                         </div>

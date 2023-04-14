@@ -51,7 +51,8 @@
             width: 100%;
             height: 100%;
             content: "";
-            background-color: rgba(0,0,0,.8);
+            // background-color: rgba(0,0,0,.6);
+            background-image: linear-gradient(to right, rgba(31.5, 31.5, 52.5, 1) calc((50vw - 170px) - 340px), rgba(31.5, 31.5, 52.5, 0.84) 50%, rgba(31.5, 31.5, 52.5, 0.84) 100%);
             z-index: 1;
         }
         img{
@@ -148,7 +149,7 @@
                 margin-right: 2rem;
                 border-radius: 8px;
                 overflow: hidden;
-                box-shadow: rgba(0,0,0,.1) 0 5px 5px;
+                box-shadow: rgba(0,0,0,.3) 1px 0 10px;
                 cursor: pointer;
                 &:last-child{
                     margin-right: 0;

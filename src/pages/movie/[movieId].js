@@ -1,23 +1,30 @@
 import CircleRating from '@/components/shared/circleRating/circleRating';
-import {OnlyHeading} from '@/components/shared/headingLink/headingLink';
 import MainContainer from '@/components/shared/mainContainer/mainContainer';
 import { enviourment } from 'next.config';
 import Head from 'next/head';
 import Image from 'next/image';
 import Moment from 'react-moment';
-import Carousel from "react-elastic-carousel";
-const PopularDetails = ({MovieDetails, MovieDetailsTrailer, MovieDetailsKeywords})=>{
+import { useState } from 'react';
+import Casting from '@/components/movie/casting/casting';
+import Recomended from '@/components/movie/recomended/recomended';
+import ReactPlayer from 'react-player/lazy'
+const PopularDetails = ({MovieDetails, MovieDetailsTrailer, MovieDetailsKeywords, MovieDetailsCredits, MovieDetailsRecomemdedData})=>{
+    const [trailers, setTrailers] = useState(false);
+    const [loading, setLoading] = useState(false);
     const ratingava = ()=>{
         return(
             MovieDetails.vote_average * 10
         )
     }
     const breakPoints = [
-        { width: 1, itemsToShow: 3 },
-        { width: 550, itemsToShow: 3 },
-        { width: 768, itemsToShow: 3 },
+        { width: 1, itemsToShow: 1 },
+        { width: 550, itemsToShow: 1},
+        { width: 768, itemsToShow: 1 },
         { width: 1200, itemsToShow: 4 },
       ];
+      const clickTrailer = ()=>{
+        setTrailers(!trailers)
+      }
     
     return(
         <>
@@ -29,111 +36,128 @@ const PopularDetails = ({MovieDetails, MovieDetailsTrailer, MovieDetailsKeywords
                 <link rel="icon" href="/favicon.ico" />
             </Head>                
             <div className="inner_movie_hero_wrapper">
-                <Image className='backdrop' src={`${enviourment.image_base_url}/original${MovieDetails.backdrop_path}`} fill={true}  />
-                <MainContainer>
-                    <div className="main_area_content d-flex justify-content-between">
-                        <div className="movie_avator_back">
-                            <Image alt={MovieDetails.title} src={`${enviourment.image_base_url}/w400${MovieDetails.poster_path}`} fill={true}  />
-                        </div>
-                        <div className="content_area d-flex flex-column">
-                            <h1>{MovieDetails.title}</h1>
-                            <ul className= "widget mb d-flex">
-                                <li>
-                                    <div className="circle_rating inner">
-                                        <CircleRating
-                                            rating={Math.floor(ratingava().toFixed(1))}
-                                        />
+                    <>
+                        <Image className='backdrop' src={`${enviourment.image_base_url}/original${MovieDetails.backdrop_path}`} fill={true}  />
+                        <MainContainer>
+                            <div className="main_area_content d-flex justify-content-between">
+                                <div className="movie_avator_back">
+                                    <Image placeholder='blur' blurDataURL={
+          "https://firebasestorage.googleapis.com/v0/b/replay-chat-dd920.appspot.com/o/next-images%2Fbilly-huynh-W8KTS-mhFUE-unsplash.jpg?alt=media&token=c754dcd9-5bb6-422b-bba2-35b40f1b047f"
+        }  alt={MovieDetails.title} src={`${enviourment.image_base_url}/w400${MovieDetails.poster_path}`} fill={true}  />
+                                    <div className="movie_video_back d-flex align-items-center justify-content-center">
+                                        <Image  onClick={() =>setTrailers(!trailers)} loading="lazy" alt="icon" src="/images/playvid.png" fill={true} />
                                     </div>
-                                </li>
-                                <li className='d-flex align-items-center'>
-                                    <Image alt="icon" src="/images/date.png" fill={true}  />
-                                    <Moment format="Do, MMMM YYYY">
-                                        {MovieDetails.release_date}
-                                    </Moment> 
-                                </li>
-                                <li className='d-flex align-items-center'>
-                                    <Image alt="icon" src="/images/earth.png" fill={true}  />
-                                    {
-                                            MovieDetails.production_countries.map((item, i)=>{
-                                                return(
-                                                    <>
+                                </div>
+                                <div className="content_area d-flex flex-column">
+                                    <h1>{MovieDetails.title}</h1>
+                                    <ul className= "widget inner mb d-flex">
+                                        <li>
+                                            <div className="circle_rating inner">
+                                                <CircleRating
+                                                    rating={Math.floor(ratingava().toFixed(1))}
+                                                />
+                                            </div>
+                                        </li>
+                                        <li className='d-flex align-items-center'>
+                                            <Image loading="lazy" alt="icon" src="/images/date.png" fill={true}  />
+                                            <Moment format="Do, MMMM YYYY">
+                                                {MovieDetails.release_date}
+                                            </Moment> 
+                                        </li>
+                                        <li className='d-flex align-items-center'>
+                                            <Image loading="lazy" alt="icon" src="/images/earth.png" fill={true}  />
+                                            {
+                                                    MovieDetails.production_countries.map((item, i)=>{
+                                                        return(
+                                                            <>
 
-                                                        <span key={i}>{item.iso_3166_1}, </span>
-                                                    </>
-                                                )
-                                            })
-                                        }
-                                    
-                                </li>
-                                <li className='d-flex align-items-center'>
-                                    <Image alt="icon" src="/images/music-notes.png" fill={true}  />
+                                                                <span key={i}>{item.iso_3166_1}, </span>
+                                                            </>
+                                                        )
+                                                    })
+                                                }
+                                            
+                                        </li>
+                                        <li className='d-flex align-items-center'>
+                                            <Image loading="lazy" alt="icon" src="/images/music-notes.png" fill={true}  />
+                                            {
+                                                    MovieDetails.genres.map((item, i)=>{
+                                                        return(
+                                                            <>
+                                                                <span key={i}>{item.name}, </span>
+                                                            </>
+                                                        )
+                                                    })
+                                                }
+                                        </li>
+                                        <li className='d-flex align-items-center star'><Image loading="lazy" src="/images/star.png" fill={true} alt="icon" /> {MovieDetails.vote_average}/10</li>
+                                        <li className='d-flex align-items-center'><Image loading="lazy" alt="icon" src="/images/like.png" fill={true} /> {MovieDetails.vote_count}</li>
+                                    </ul>
+                                    <div className='d-flex align-items-center buttons_wrap'>
+                                        <p>Tagline: <span className='highlight'>{MovieDetails.tagline}</span></p>
+                                    </div>                            
+                                    <h3>Overview</h3>
+                                    <p>{MovieDetails.overview}</p>
                                     {
-                                            MovieDetails.genres.map((item, i)=>{
-                                                return(
-                                                    <>
-                                                        <span key={i}>{item.name}, </span>
-                                                    </>
-                                                )
-                                            })
-                                        }
-                                </li>
-                                <li className='d-flex align-items-center star'><Image src="/images/star.png" fill={true} alt="icon" /> {MovieDetails.vote_average}/10</li>
-                                <li className='d-flex align-items-center'><Image alt="icon" src="/images/like.png" fill={true} /> {MovieDetails.vote_count}</li>
-                            </ul>
-                            
-                            <p>Tagline: <span className='highlight'>{MovieDetails.tagline}</span></p>
-                            <h3>Overview</h3>
-                            <p>{MovieDetails.overview}</p>
-                            {
-                                MovieDetailsKeywords.keywords.length > 0 ? 
-                                <div>
-                                    <h3>Tags</h3>
-                                    <div className="tags">
-                                        {
-                                            MovieDetailsKeywords.keywords.map((item,i)=>{
-                                                return(
-                                                    <span key={i}>{item.name}</span>
-                                                )
-                                            })
-                                        }
-                                    </div>
-                                </div> :
-                                ""
-                            }
-                            
-                        </div>
-                    </div>
-                </MainContainer>
+                                        MovieDetailsKeywords.keywords.length > 0 ? 
+                                        <div>
+                                            <h3>Tags</h3>
+                                            <div className="tags">
+                                                {
+                                                    MovieDetailsKeywords.keywords.map((item,i)=>{
+                                                        return(
+                                                            <span key={i}>{item.name}</span>
+                                                        )
+                                                    })
+                                                }
+                                            </div>
+                                        </div> :
+                                        ""
+                                    }
+                                    
+                                </div>
+                            </div>
+                        </MainContainer>
+                    </>
+                
             </div>
+            {
+                trailers ?
+                <div className="movie_trailer_pop_wrapper">                
+                    <div className="details">
+                        <div className='d-flex align-items-center justify-content-between'>
+                            <h3>Movie Trailers</h3>
+                            <div onClick={() =>setTrailers(!trailers)}><Image src="/images/remove.png" fill={true} alt="icon" /></div>
+                        </div>                    
+                        <ul className="main_area">
+                            {
+                                MovieDetailsTrailer.results.map((item,i)=>{
+                                    return(
+                                        <li key={i}>
+                                            <h4>{item.name}</h4>
+                                            <div className='trailer_video'>
+                                                <ReactPlayer
+                                                    url={`https://www.youtube.com/watch?v=${item.key}`} 
+                                                    width='100%'
+                                                    height='100%'
+                                                />  
+                                            </div>
+                                            
+                                        </li>
+                                    )
+                                })
+                            }
+                        </ul>
+                    </div>                
+                </div>
+                :
+                ""
+            }
             <div className="inner_movie_body_details">
                 <MainContainer>
-                    <div className="trailers_details d-flex justify-content-center">
-                        <div className="heading_area">
-                            <OnlyHeading
-                                mainTitle="Movie Trailer" 
-                                extraText="to" 
-                                highlightedTtile="Watch Now"
-                                descriptionText="Most watched movies by days"
-                            />
-                            
-                        </div>
-                        <ul className="details d-flex flex-wrap">
-                            <Carousel breakPoints={breakPoints}>
-                                {
-                                    MovieDetailsTrailer.results.map((item,i)=>{
-                                        return(
-                                            <li key={i}>
-                                                <iframe width="560" height="315" src={`https://www.youtube.com/embed/${item.key}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                                            </li>
-                                        )
-                                    })
-                                }
-                            </Carousel>
-                        </ul>
-                    </div>
+                    <Casting MovieDetailsCredits={MovieDetailsCredits} />
+                    <Recomended MovieDetailsRecomemdedData = {MovieDetailsRecomemdedData} />
                 </MainContainer>
-                
-                
             </div>
         </>
     )
@@ -148,14 +172,21 @@ export async function getServerSideProps(context){
     const responssMoviePopular = await fetch(`${enviourment.apiUrl}/movie/${params.movieId}?api_key=${enviourment.tmdbApiKey}`);
     const responssMovieVideo = await fetch(`${enviourment.apiUrl}/movie/${params.movieId}/videos?api_key=${enviourment.tmdbApiKey}`);
     const responssMovieKeywords = await fetch(`${enviourment.apiUrl}/movie/${params.movieId}/keywords?api_key=${enviourment.tmdbApiKey}`);
+    const responssMovieCredits = await fetch(`${enviourment.apiUrl}/movie/${params.movieId}/credits?api_key=${enviourment.tmdbApiKey}`);
+    const responssMovieRecomemded = await fetch(`${enviourment.apiUrl}/movie/${params.movieId}/recommendations?api_key=${enviourment.tmdbApiKey}`);
+
     const MoviePopularData = await responssMoviePopular.json();
     const MoviePopularTrailerData = await responssMovieVideo.json();
     const MoviePopularKeywordsData = await responssMovieKeywords.json();
+    const MoviePopularCreditsData = await responssMovieCredits.json();
+    const responssMovieRecomemdedData = await responssMovieRecomemded.json();
     return{
       props:{
         MovieDetails: MoviePopularData,
         MovieDetailsTrailer:  MoviePopularTrailerData,
-        MovieDetailsKeywords:  MoviePopularKeywordsData
+        MovieDetailsKeywords:  MoviePopularKeywordsData,
+        MovieDetailsCredits:  MoviePopularCreditsData,
+        MovieDetailsRecomemdedData:  responssMovieRecomemdedData
       }
     }
   }

@@ -9,7 +9,7 @@ import CircleRating from '@/components/shared/circleRating/circleRating';
 import { useEffect, useState } from 'react';
 import { MovieSkeletonCard } from '@/components/shared/skeletons/skeletons';
 import Carousel from "react-elastic-carousel";
-const MovieTopRated = ({responssMovieTopRatedData})=>{
+const MovieTopRated = ({MovieTopRatedData})=>{
     const [loading, setLoading] = useState(false);
     useEffect(()=>{
         setTimeout(() => setLoading(true), 2000);
@@ -22,13 +22,13 @@ const MovieTopRated = ({responssMovieTopRatedData})=>{
       ];
     return(
         <>
-            <div className={`${styles.top_rated_wrapper} ptLarge`}>
+            <div className={`${styles.top_rated_wrapper} ptLarge pbLarge`}>
                 <MainContainer>
                     <div className={`${styles.main_wrapper} d-flex justify-content-between`}>                        
                         <div className={`${styles.details_area} d-flex scroll_area`}>
                             <Carousel breakPoints={breakPoints}>
                                 {
-                                    responssMovieTopRatedData.results.slice(0,10).map((item,i)=>{
+                                    MovieTopRatedData.results.slice(0,10).map((item,i)=>{
                                         const ratingava = ()=>{
                                             return(
                                                 item.vote_average * 10
@@ -38,17 +38,17 @@ const MovieTopRated = ({responssMovieTopRatedData})=>{
                                             !loading ? <MovieSkeletonCard /> :
                                             <div key={i} className={`${styles.card_wrapper} card_wrapper`}>
                                                 <div className="image_wrapper">
-                                                    <Link href=""><Image src={`${enviourment.image_base_url}/w300${item.poster_path}`} fill={true} alt="" /></Link>
+                                                    <Link href={`/movie/${item.id}`}><Image loading="lazy" src={`${enviourment.image_base_url}/w300${item.poster_path}`} fill={true} alt="" /></Link>
                                                     <div className="circle_rating">
                                                         <CircleRating
                                                             rating={Math.floor(ratingava().toFixed(1))}
                                                         />
                                                     </div>
                                                 </div>
-                                                <Link href=""><h3>{item.title}</h3></Link>
+                                                <Link href={`/movie/${item.id}`}><h3>{item.title}</h3></Link>
                                                 <ul className="widget d-flex justify-content-between">
-                                                    <li className='d-flex align-items-center'><Image src="/images/star.png" fill={true} alt="icon" /> {item.vote_average}/10</li>
-                                                    <li className='d-flex align-items-center'><Image alt="icon" src="/images/like.png" fill={true} /> {item.vote_count}</li>
+                                                    <li className='d-flex align-items-center'><Image loading="lazy" src="/images/star.png" fill={true} alt="icon" /> {item.vote_average}/10</li>
+                                                    <li className='d-flex align-items-center'><Image loading="lazy" alt="icon" src="/images/like.png" fill={true} /> {item.vote_count}</li>
                                                 </ul>
                                             </div>
                                         )
@@ -62,7 +62,7 @@ const MovieTopRated = ({responssMovieTopRatedData})=>{
                                 extraText="to" 
                                 highlightedTtile="Watch Now"
                                 descriptionText="Most watched movies by days"
-                                src="/movie/popular"
+                                src={`/movie/popular`}
                                 buttonText="View All" 
                             />
                         </div>

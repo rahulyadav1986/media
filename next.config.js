@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images:{
-    domains: ['image.tmdb.org']
+    domains: ['image.tmdb.org', 'firebasestorage.googleapis.com']
   },
   enviourment:{
     tmdbApiKey: ['b976c85658ffab05600e4ade8e894259'],    
