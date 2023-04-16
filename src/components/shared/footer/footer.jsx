@@ -16,11 +16,10 @@ const Footer = ()=>{
                             <div className={styles.details}>
                                 <h3>Movies</h3>
                                 <ul className={`${styles.footer_menu}`}>
-                                    <li><Link href="" className="d-flex align-items-center"><Image src="/images/btn_arrow.png" fill={true} alt="icon" /> Popular Movies</Link></li>  
-                                    <li><Link href="" className="d-flex align-items-center"><Image src="/images/btn_arrow.png" fill={true} alt="icon" /> Latest Movies</Link></li> 
-                                    <li><Link href="" className="d-flex align-items-center"><Image src="/images/btn_arrow.png" fill={true} alt="icon" /> Top Rated Movies</Link></li> 
-                                    <li><Link href="" className="d-flex align-items-center"><Image src="/images/btn_arrow.png" fill={true} alt="icon" /> Now Playing Movies</Link></li> 
-                                    <li><Link href="" className="d-flex align-items-center"><Image src="/images/btn_arrow.png" fill={true} alt="icon" /> Upcoming Movies</Link></li>                                     
+                                    <li><Link href="/movie/popular" className="d-flex align-items-center"><Image src="/images/btn_arrow.png" fill={true} alt="icon" /> Popular Movies</Link></li>  
+                                    <li><Link href="/movie/top-rated" className="d-flex align-items-center"><Image src="/images/btn_arrow.png" fill={true} alt="icon" /> Top Rated Movies</Link></li> 
+                                    <li><Link href="/movie/now-playing" className="d-flex align-items-center"><Image src="/images/btn_arrow.png" fill={true} alt="icon" /> Now Playing Movies</Link></li> 
+                                    <li><Link href="/movie/upcoming" className="d-flex align-items-center"><Image src="/images/btn_arrow.png" fill={true} alt="icon" /> Upcoming Movies</Link></li>                                     
                                 </ul>
                             </div>
                             <div className={styles.details}>

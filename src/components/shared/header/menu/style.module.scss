@@ -9,6 +9,43 @@
         font-family: var(--TitleFont); 
         font-weight: 700;
         cursor: pointer;
+        &:last-child{
+            .submenu{
+                left: auto;
+                right: 0;
+                &::before{
+                    left: auto;
+                    right: 28px;
+                }
+            }
+        }
+        .submenu{
+            position: absolute;
+            top: calc(100% + 15px);
+            left: 0;
+            width: 25rem;
+            background-color: var(--DarkColor); 
+            border-radius: 5px; 
+            &::before{
+                width: 10px;
+                height: 7px;
+                background-color: var(--DarkColor); ;
+                position: absolute;
+                top: -7px;
+                left: 28px;
+                content: "";
+                clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            }          
+            li{
+                padding: 10px 0 10px 15px;
+                margin: 0;
+                border-bottom: rgba(255,255,255,.05) 1px solid;
+                font-size: 13px;
+                &::before{
+                    display: none
+                }
+            }
+        }
         &::before{
             width: 7px;
             height: 5px;
@@ -25,3 +62,4 @@
         }
     }
 }
+

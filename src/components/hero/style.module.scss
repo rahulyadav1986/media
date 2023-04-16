@@ -52,7 +52,7 @@
             height: 100%;
             content: "";
             // background-color: rgba(0,0,0,.6);
-            background-image: linear-gradient(to right, rgba(31.5, 31.5, 52.5, 1) calc((50vw - 170px) - 340px), rgba(31.5, 31.5, 52.5, 0.84) 50%, rgba(31.5, 31.5, 52.5, 0.84) 100%);
+            background-image: linear-gradient(to right, rgba(var(--GradiendColor), 1) calc((50vw - 170px) - 340px), rgba(var(--GradiendColor), 0.84) 50%, rgba(var(--GradiendColor), 0.84) 100%);
             z-index: 1;
         }
         img{
@@ -144,7 +144,7 @@
                 flex:0 0 14.4rem;
                 width: 14.4rem;
                 height: 23.9rem;
-                background-color: var(--CommonColor);
+                background-color: var(--DarkColor);
                 position: relative;
                 margin-right: 2rem;
                 border-radius: 8px;

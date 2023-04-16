@@ -19,7 +19,7 @@ const Header = ()=>{
                         </div>
                         <div className='d-flex align-items-center'>
                             <Menu />
-                            <Mode />
+                            {/* <Mode /> */}
                         </div>                        
                     </div>
                 </MainContainer>

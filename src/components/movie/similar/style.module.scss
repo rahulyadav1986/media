@@ -1,20 +1,12 @@
-.popular_wrapper{
+.upcoming_wrapper{
     width: 100%;
     .main_wrapper{
         width: 100%;
         flex-wrap: wrap;
-        .heading_area{
-            flex: 0 0 30.8593%;
-            width: 30.8593%;
-            height: 52.2rem;
-            border-radius: 8px;
-            background-image: url(../../../../public//images//heading_bubble.png);
-            background-position: right bottom;
-            background-repeat: no-repeat;
-        }
+        
         .details_area{
-            flex: 0 0 65.468%;
-            width: 65.468%;
+            flex: 0 0 100%;
+            width: 100%;
             padding-top: 0;
             padding-left: 0;
             overflow-x: auto;
@@ -22,12 +14,19 @@
             img{
                 width: 100% !important;
             }
+            .card_wrapper{
+                width: 100%;
+                flex: 0 0 100%;
+                padding: 4rem 2rem 0 2rem;
+            }
+            
+            
         }
     }
 }
 
 @media only screen and (max-width:779px){
-    .popular_wrapper{
+    .upcoming_wrapper{
         .main_wrapper{
             .heading_area{
                 flex: 0 0 100%;

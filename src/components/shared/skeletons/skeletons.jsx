@@ -102,4 +102,33 @@ const MovieSkeletonCard = ()=>{
     )
 }
 
-export {HeroSkeleton, HeroSkeletonCard, MovieSkeletonCard}
+const MovieInnerSkeletonCard = ()=>{
+    return(
+        <>
+            <div className="card_wrapper skel_portion">
+                <div className="image_wrapper">
+                    <SkeletonTheme baseColor="rgb(3,3,3)" highlightColor="rgba(255,255,255,.2)">
+                        <Skeleton count={1} className={styles.skeCard2} />
+                    </SkeletonTheme>
+                </div>
+                <SkeletonTheme baseColor="rgb(3,3,3)" highlightColor="rgba(255,255,255,.2)">
+                    <Skeleton count={1} className={styles.skelHeading} />
+                </SkeletonTheme>
+                <ul className="widget d-flex justify-content-between">
+                    <li>
+                        <SkeletonTheme baseColor="rgb(3,3,3)" highlightColor="rgba(255,255,255,.2)">
+                            <Skeleton count={1} className={styles.skelWidget2} />
+                        </SkeletonTheme>
+                    </li>
+                    <li>
+                        <SkeletonTheme baseColor="rgb(3,3,3)" highlightColor="rgba(255,255,255,.2)">
+                            <Skeleton count={1} className={styles.skelWidget2} />
+                        </SkeletonTheme>
+                    </li>
+                </ul>
+            </div>
+        </>
+    )
+}
+
+export {HeroSkeleton, HeroSkeletonCard, MovieSkeletonCard, MovieInnerSkeletonCard}

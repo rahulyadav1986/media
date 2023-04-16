@@ -6,12 +6,9 @@ import Image from 'next/image';
 import Moment from 'react-moment';
 import { useState } from 'react';
 import Casting from '@/components/movie/casting/casting';
+import Recomended from '@/components/movie/recomended/recomended';
 import ReactPlayer from 'react-player/lazy'
-import MovieRecomended from '@/components/movie/recomended/recomended';
-import MovieSimilar from '@/components/movie/similar/similar';
-
-
-const PopularDetails = ({MovieDetails, MovieDetailsTrailer, MovieDetailsKeywords, MovieDetailsCredits, MovieDetailsRecomemdedData, MovieDetailsSimilarData})=>{
+const RecomemdedDetails = ({MovieDetails, MovieDetailsTrailer, MovieDetailsKeywords, MovieDetailsCredits, MovieDetailsRecomemdedData})=>{
     const [trailers, setTrailers] = useState(false);
     const [loading, setLoading] = useState(false);
     const ratingava = ()=>{
@@ -19,7 +16,6 @@ const PopularDetails = ({MovieDetails, MovieDetailsTrailer, MovieDetailsKeywords
             MovieDetails.vote_average * 10
         )
     }
-  
     const breakPoints = [
         { width: 1, itemsToShow: 1 },
         { width: 550, itemsToShow: 1},
@@ -28,10 +24,6 @@ const PopularDetails = ({MovieDetails, MovieDetailsTrailer, MovieDetailsKeywords
       ];
       const clickTrailer = ()=>{
         setTrailers(!trailers)
-      }
-
-      const backDrop = {
-            backgroundImage: `url(${enviourment.image_base_url}/original${MovieDetails.backdrop_path})`,
       }
     
     return(
@@ -43,14 +35,13 @@ const PopularDetails = ({MovieDetails, MovieDetailsTrailer, MovieDetailsKeywords
                 <meta name="keywords"></meta>
                 <link rel="icon" href="/favicon.ico" />
             </Head>                
-            <div className="inner_movie_hero_wrapper" style={backDrop} >
+            <div className="inner_movie_hero_wrapper">
                     <>
-                        {/* <Image className='backdrop' src={`${enviourment.image_base_url}/original${MovieDetails.backdrop_path}`} fill={true}  /> */}
-                        
+                        <Image className='backdrop' src={`${enviourment.image_base_url}/original${MovieDetails.backdrop_path}`} fill={true}  />
                         <MainContainer>
                             <div className="main_area_content d-flex justify-content-between">
                                 <div className="movie_avator_back">
-                                    <Image alt={MovieDetails.title} src={`${enviourment.image_base_url}/w400${MovieDetails.poster_path}`} fill={true}  />
+                                    <Image loading="lazy" alt={MovieDetails.title} src={`${enviourment.image_base_url}/w400${MovieDetails.poster_path}`} fill={true}  />
                                     <div className="movie_video_back d-flex align-items-center justify-content-center">
                                         <Image  onClick={() =>setTrailers(!trailers)} loading="lazy" alt="icon" src="/images/playvid.png" fill={true} />
                                     </div>
@@ -163,8 +154,7 @@ const PopularDetails = ({MovieDetails, MovieDetailsTrailer, MovieDetailsKeywords
             <div className="inner_movie_body_details">
                 <MainContainer>
                     <Casting MovieDetailsCredits={MovieDetailsCredits} />
-                    <MovieSimilar MovieDetailsSimilarData = {MovieDetailsSimilarData} />
-                    <MovieRecomended MovieDetailsRecomemdedData = {MovieDetailsRecomemdedData} />
+                    <Recomended MovieDetailsRecomemdedData = {MovieDetailsRecomemdedData} />
                 </MainContainer>
             </div>
         </>
@@ -172,32 +162,29 @@ const PopularDetails = ({MovieDetails, MovieDetailsTrailer, MovieDetailsKeywords
 }
 
 
-export default PopularDetails
+export default RecomemdedDetails
 
 
 export async function getServerSideProps(context){
     const {params} = context;
-    const responssMoviePopular = await fetch(`${enviourment.apiUrl}/movie/${params.movieId}?api_key=${enviourment.tmdbApiKey}`);
-    const responssMovieVideo = await fetch(`${enviourment.apiUrl}/movie/${params.movieId}/videos?api_key=${enviourment.tmdbApiKey}`);
-    const responssMovieKeywords = await fetch(`${enviourment.apiUrl}/movie/${params.movieId}/keywords?api_key=${enviourment.tmdbApiKey}`);
-    const responssMovieCredits = await fetch(`${enviourment.apiUrl}/movie/${params.movieId}/credits?api_key=${enviourment.tmdbApiKey}`);
-    const responssMovieRecomemded = await fetch(`${enviourment.apiUrl}/movie/${params.movieId}/recommendations?api_key=${enviourment.tmdbApiKey}`);
-    const responssMovieSimilar = await fetch(`${enviourment.apiUrl}/movie/${params.movieId}/similar?api_key=${enviourment.tmdbApiKey}`);
+    const responssMoviePopular = await fetch(`${enviourment.apiUrl}/movie/${params.recomendedId}?api_key=${enviourment.tmdbApiKey}`);
+    const responssMovieVideo = await fetch(`${enviourment.apiUrl}/movie/${params.recomendedId}/videos?api_key=${enviourment.tmdbApiKey}`);
+    const responssMovieKeywords = await fetch(`${enviourment.apiUrl}/movie/${params.recomendedId}/keywords?api_key=${enviourment.tmdbApiKey}`);
+    const responssMovieCredits = await fetch(`${enviourment.apiUrl}/movie/${params.recomendedId}/credits?api_key=${enviourment.tmdbApiKey}`);
+    const responssMovieRecomemded = await fetch(`${enviourment.apiUrl}/movie/${params.recomendedId}/recommendations?api_key=${enviourment.tmdbApiKey}`);
 
     const MoviePopularData = await responssMoviePopular.json();
     const MoviePopularTrailerData = await responssMovieVideo.json();
     const MoviePopularKeywordsData = await responssMovieKeywords.json();
     const MoviePopularCreditsData = await responssMovieCredits.json();
     const responssMovieRecomemdedData = await responssMovieRecomemded.json();
-    const responssMovieSimilarData = await responssMovieSimilar.json();
     return{
       props:{
         MovieDetails: MoviePopularData,
         MovieDetailsTrailer:  MoviePopularTrailerData,
         MovieDetailsKeywords:  MoviePopularKeywordsData,
         MovieDetailsCredits:  MoviePopularCreditsData,
-        MovieDetailsRecomemdedData:  responssMovieRecomemdedData,
-        MovieDetailsSimilarData:  responssMovieSimilarData
+        MovieDetailsRecomemdedData:  responssMovieRecomemdedData
       }
     }
   }

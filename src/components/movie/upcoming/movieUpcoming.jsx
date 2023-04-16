@@ -9,6 +9,7 @@ import CircleRating from '@/components/shared/circleRating/circleRating';
 import { MovieSkeletonCard } from '@/components/shared/skeletons/skeletons';
 import { useEffect, useState } from 'react';
 import Carousel from "react-elastic-carousel";
+import MovieItem from '../movieItem/movieItem';
 const MovieUpcoming = ({MovieUpcomingData})=>{
     const [loading, setLoading] = useState(false);
     useEffect(()=>{
@@ -35,22 +36,7 @@ const MovieUpcoming = ({MovieUpcomingData})=>{
                                             )
                                         }
                                         return(
-                                            !loading ? <MovieSkeletonCard /> :
-                                            <div key={i} className={`${styles.card_wrapper} card_wrapper`}>
-                                                <div className="image_wrapper">
-                                                    <Link href={`/movie/${item.id}`}><Image loading="lazy" src={`${enviourment.image_base_url}/w300${item.poster_path}`} fill={true} alt="" /></Link> 
-                                                    <div className="circle_rating">
-                                                        <CircleRating
-                                                            rating={Math.floor(ratingava().toFixed(1))}
-                                                        />
-                                                    </div> 
-                                                </div>
-                                                <Link href=""><h3>{item.title}</h3></Link>
-                                                <ul className="widget d-flex justify-content-between">
-                                                    <li className='d-flex align-items-center'><Image loading="lazy" src="/images/star.png" fill={true} alt="icon" /> {item.vote_average}/10</li>
-                                                    <li className='d-flex align-items-center'><Image loading="lazy" alt="icon" src="/images/like.png" fill={true} /> {item.vote_count}</li>
-                                                </ul>
-                                            </div>
+                                            !loading ? <MovieSkeletonCard /> : <MovieItem key={i} item = {item} />
                                         )
                                     })
                                 }

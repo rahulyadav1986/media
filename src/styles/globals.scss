@@ -6,9 +6,23 @@
   --CommonColor: rgb(25,26,29);
   --DarkColor: rgb(5,5,5);
   --WhiteColor: rgb(233,231,231);
+  --GradiendColor: 31.5, 31.5, 52.5;
   --TitleFont: 'Barlow', sans-serif;
   --BodyFont: 'Lato', sans-serif;
 }
+// .light-theme{
+//   --PrimaryColor: rgb(207,61,54);
+//   --SecondaryColor: #d9d9d9;
+//   --CommonColor: #f7f7f7;
+//   --DarkColor: rgb(5,5,5);
+//   --WhiteColor: rgb(3,3,3);
+//   --GradiendColor: 255, 255, 255;
+//   --TitleFont: 'Barlow', sans-serif;
+//   --BodyFont: 'Lato', sans-serif;  
+//   // .hero_wrapper{
+//   //   display: none !important;
+//   // }
+// }
 html{
   font-size: 62.5%;
   scroll-behavior: smooth;
@@ -109,6 +123,27 @@ a{
   flex-wrap: wrap;
 }
 
+.PrimaryColor{
+  color: var(--PrimaryColor);
+}
+.SecondaryColor{
+  color: var(--SecondaryColor);
+}
+.CommonColor{
+  color: var(--CommonColor);
+}
+.DarkColor{
+  color: var(--DarkColor);
+}
+.WhiteColor{
+  color: var(--WhiteColor);
+}
+.WhiteColor{
+  color: var(--WhiteColor);
+}
+
+
+
 .global_button{
   font-size: 18px;
   @extend .inline-flex;
@@ -177,6 +212,7 @@ a{
   flex: 0 0 24.8rem;
   width: 24.8rem;
   margin-right: 3.7rem;
+  margin-bottom: 3rem;
   scroll-snap-align: center;
   &:last-child{
       margin-right: 0;
@@ -189,7 +225,7 @@ a{
   .image_wrapper  {        
       width: 100%;
       height: 37.3rem;
-      background-color: var(--SecondaryColor);
+      background-color: var(--DarkColor);
       position: relative;
       border-radius: 8px;
       box-shadow: rgba(0,0,0,.3) 1px 0 10px;
@@ -198,7 +234,7 @@ a{
           position: absolute;
           top: 0;
           left: 0;
-          width: 100%;
+          width: 100% !important;
           height: 100%;
           border-radius: 8px;
           opacity: .55;
@@ -240,7 +276,7 @@ a{
       }
     }
     span{
-      margin: 0 5px;
+      margin: 0 0;
     }
       img{
           width: 16px !important;
@@ -374,6 +410,8 @@ a{
   height: 90rem;
   padding-top: 26.3rem;
   position: relative;
+  background-size: cover;
+  background-position: center top;
   &::after{
     width: 100%;
     height: 51.3rem;
@@ -394,7 +432,7 @@ a{
       height: 100%;
       content: "";
       // background-color: rgba(0,0,0,.6);
-      background-image: linear-gradient(to right, rgba(31.5, 31.5, 52.5, 1) calc((50vw - 170px) - 340px), rgba(31.5, 31.5, 52.5, 0.84) 50%, rgba(31.5, 31.5, 52.5, 0.84) 100%);
+      background-image: linear-gradient(to right, rgba(var(--GradiendColor), 1) calc((50vw - 170px) - 340px), rgba(var(--GradiendColor), 0.84) 50%, rgba(var(--GradiendColor), 0.84) 100%);
       z-index: 1;
   }
   .buttons_wrap{
@@ -740,6 +778,54 @@ a{
   .movie_trailer_pop_wrapper{
     .details{
       width: 80%;
+    }
+  }
+}
+
+.inner_hero_wrapper{
+  width: 100%;
+  height: 40rem;
+}
+
+.row_movie_wrapper{
+  width: 100%;
+  padding-top: 15rem;
+  .main_grid_wrapper{
+    width: 100%;
+    .filter_area{
+      margin-bottom: 2rem;
+      select{
+        width: 20rem;
+        background-color: var(--DarkColor);
+        height: 40px;
+        padding:0 2rem;
+        outline-style: none;
+        border: none;
+        color: var(--WhiteColor);
+        border-radius: 5px;
+      }
+    }
+  }
+  .grid{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    .card_wrapper{
+      width: 100%;
+      &.skel_portion{
+        padding: 4rem 2rem 0 2rem;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width:500px){
+  .row_movie_wrapper{
+    h1{
+      font-size: 3rem;
+    }
+    .grid{
+      grid-template-columns: repeat(2, 1fr);
+      
     }
   }
 }

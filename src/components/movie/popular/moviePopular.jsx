@@ -2,14 +2,11 @@
 import MainContainer from '@/components/shared/mainContainer/mainContainer';
 import styles from './style.module.scss'
 import {HeadingLink} from '@/components/shared/headingLink/headingLink';
-import Image from 'next/image';
-import Link from 'next/link';
-import { enviourment } from 'next.config';
-import CircleRating from '@/components/shared/circleRating/circleRating';
 import { useEffect, useState } from 'react';
 import { MovieSkeletonCard } from '@/components/shared/skeletons/skeletons';
 import Carousel from "react-elastic-carousel";
-const MoviePopular = ({MoviePopularData})=>{
+import MovieItem from '../movieItem/movieItem';
+const MoviePopular = ({MoviePopularData, item})=>{
     const [loading, setLoading] = useState(false);
     useEffect(()=>{
         setTimeout(() => setLoading(true), 2000);
@@ -22,7 +19,7 @@ const MoviePopular = ({MoviePopularData})=>{
       ];
     return(
         <>
-            <div className={styles.popular_wrapper}>
+            <div className={`${styles.popular_wrapper} ptLarge`}>
                 <MainContainer>
                     <div className={`${styles.main_wrapper} d-flex justify-content-between`}>
                         <div className={`${styles.heading_area} heading_area`}>
@@ -38,29 +35,10 @@ const MoviePopular = ({MoviePopularData})=>{
                         <div className={`${styles.details_area} d-flex scroll_area`}>
                             <Carousel breakPoints={breakPoints}>
                                 {
-                                    MoviePopularData.results.slice(4,14).map((item,i)=>{
-                                        const ratingava = ()=>{
-                                            return(
-                                                item.vote_average * 10
-                                            )
-                                        }
+                                    MoviePopularData.results.slice(4,14).map((item,i)=>{                                        
                                         return(
-                                            !loading ? <MovieSkeletonCard /> :
-                                            <div key={i} className={`${styles.card_wrapper} card_wrapper`}>
-                                                <div className="image_wrapper">
-                                                    <Link href={`/movie/${item.id}`}><Image loading="lazy" src={`${enviourment.image_base_url}/w300${item.poster_path}`} fill={true} alt="" /></Link>
-                                                    <div className="circle_rating">
-                                                        <CircleRating
-                                                            rating={Math.floor(ratingava().toFixed(1))}
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <Link href={`/movie/${item.id}`}><h3>{item.title}</h3></Link>
-                                                <ul className="widget d-flex justify-content-between">
-                                                    <li className='star d-flex align-items-center'><Image loading="lazy" src="/images/star.png" fill={true} alt="icon" /> {item.vote_average}/10</li>
-                                                    <li className='d-flex align-items-center'><Image loading="lazy" alt="icon" src="/images/like.png" fill={true} /> {item.vote_count}</li>
-                                                </ul>
-                                            </div>
+                                            !loading ? <MovieSkeletonCard /> : <MovieItem key={i} item = {item} />
+                                            
                                         )
                                     })
                                 }

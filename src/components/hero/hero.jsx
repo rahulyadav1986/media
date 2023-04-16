@@ -15,7 +15,7 @@ const Hero = ({HeroData})=>{
     
     return(
         <>
-            <div className={styles.hero_wrapper}>
+            <div className={`${styles.hero_wrapper} hero_wrapper`}>
                 {
                     HeroData?.results.map((item,i)=>{
                         return(
