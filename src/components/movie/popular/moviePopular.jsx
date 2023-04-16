@@ -12,14 +12,14 @@ const MoviePopular = ({MoviePopularData, item})=>{
         setTimeout(() => setLoading(true), 2000);
     })
     const breakPoints = [
-        { width: 1, itemsToShow: 3 },
+        { width: 1, itemsToShow: 2 },
         { width: 550, itemsToShow: 3 },
         { width: 768, itemsToShow: 3 },
         { width: 1200, itemsToShow: 4 },
       ];
     return(
         <>
-            <div className={`${styles.popular_wrapper} ptLarge`}>
+            <div className={`${styles.popular_wrapper}`}>
                 <MainContainer>
                     <div className={`${styles.main_wrapper} d-flex justify-content-between`}>
                         <div className={`${styles.heading_area} heading_area`}>

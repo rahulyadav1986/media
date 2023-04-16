@@ -496,12 +496,12 @@ a{
         line-height: 2rem;
       }
       h1{
-        font-size: 6rem;
+        font-size: 4rem;
         font-weight: 900;
         letter-spacing: 2px;
-        color: transparent;
-        -webkit-text-stroke-width: 2px;
-        -webkit-text-stroke-color: var(--WhiteColor);
+        color: var(--PrimaryColor);
+        // -webkit-text-stroke-width: 2px;
+        // -webkit-text-stroke-color: var(--WhiteColor);
         margin-bottom: 3.5rem;
       }
       h3{
@@ -656,7 +656,7 @@ a{
       display: grid;  
       grid-template-columns: repeat(1, 1fr); 
       gap: 3rem;   
-      max-height: 52rem;
+      max-height: 68rem;
       overflow: auto;
       &::-webkit-scrollbar {
         width: 4px;
@@ -746,8 +746,9 @@ a{
     .main_area_content {
       flex-wrap: wrap;
       .movie_avator_back{
-        flex: 0 0 34%;
-        width: 34%;
+        flex: 0 0 60%;
+        width: 60%;
+        margin-bottom: 4rem;
       }
       .content_area {
         flex: 0 0 100%;
@@ -778,6 +779,26 @@ a{
   .movie_trailer_pop_wrapper{
     .details{
       width: 80%;
+    }
+  }
+  .inner_movie_hero_wrapper {
+    .main_area_content {
+      .content_area{
+        .buttons_wrap{
+          flex-wrap: wrap;
+          p{
+            flex: 0 0 100%;
+            width: 100%;
+           
+            order: 2;
+          }
+          .global_button{
+            order: 1;
+            margin-bottom: 2rem;
+          }
+        }
+        
+      }
     }
   }
 }
@@ -811,6 +832,9 @@ a{
     grid-template-columns: repeat(4, 1fr);
     .card_wrapper{
       width: 100%;
+      img{
+        width: 100% !important;
+      }
       &.skel_portion{
         padding: 4rem 2rem 0 2rem;
       }
@@ -828,4 +852,11 @@ a{
       
     }
   }
+  
+}
+
+
+.placeholder_image{
+  width: 100%;
+  height: 100%;
 }

@@ -3,6 +3,7 @@ import styles from './styles.module.scss'
 import { enviourment } from 'next.config';
 import Carousel from "react-elastic-carousel";
 import { useState } from 'react';
+import Link from 'next/link';
 const Casting = ({MovieDetailsCredits}) =>{
     const breakPoints = [
         { width: 1, itemsToShow: 3 },
@@ -22,44 +23,19 @@ const Casting = ({MovieDetailsCredits}) =>{
                         {
                             MovieDetailsCredits.cast.map((item,i)=>{
                                 return(
-                                    <>                                    
-                                        <div key={i} className={styles.card_details} onClick={()=>setCastItem(i)}>
+                                    <>
+                                        <Link href={`/person/${item.id}`}key={i} className={styles.card_details}>
                                             <div className={styles.card_image_item}>
-                                                <Image loading="lazy" src={`${enviourment.image_base_url}/w400${item.profile_path}`} fill={true} alt="" />
+                                                <Image src={`${enviourment.image_base_url}/w300/${item.profile_path}`} fill={true} alt="" />
                                             </div>
-                                            
-                                        </div>                                        
+                                        </Link>                                         
                                     </>
                                 )
                             })
                             
                         }
                     </Carousel>
-                    {                       
-                    MovieDetailsCredits.cast.map((item,i)=>{
-                            return(
-                                <>
-                                    {
-                                        castItem === i ?
-                                        <div key={i} className={styles.casting_card_pop}>
-                                            <div className={`${styles.main_area} d-flex`}>
-                                                <div className={styles.close_cast} onClick={()=>setCastItem(false)}></div>
-                                                <Image loading="lazy" src={`${enviourment.image_base_url}/w400${item.profile_path}`} fill={true} alt="" />
-                                                <ul className={styles.details}>
-                                                    <li><h3>{item.name}</h3></li>
-                                                    <li><strong>Department: </strong> {item.known_for_department}</li>
-                                                    <li><strong>Original Name: </strong> {item.original_name}</li>
-                                                    <li><strong>Character Name: </strong> {item.character}</li>
-                                                </ul>
-                                            </div>
-                                        </div> :
-                                        "" 
-                                    }
-                                    
-                                </>
-                            )
-                    }) 
-                    }
+                    
                     
                 </div>
             </div> 

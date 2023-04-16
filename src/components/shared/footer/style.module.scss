@@ -73,6 +73,11 @@
             flex: 0 0 100%;
             width: 100%;
             padding-left: 0;
+            flex-wrap: wrap;
+            .details{
+                flex: 0 0 100%;
+                width: 100%
+            }
         }
     }
 }

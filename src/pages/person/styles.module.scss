@@ -1,0 +1,97 @@
+.row_movie_wrapper{
+    width: 100%;
+    padding-top: 15rem;
+    h1{
+        margin-bottom: 3rem;
+    }
+    .grid{
+        grid-gap: 3rem;
+        grid-template-columns: repeat(5, 1fr);
+    }
+    .image_wrapper{
+        display: block;
+    }
+}
+
+
+.person_list_details_wrap{
+    width: 100%;
+    display: flex;
+    padding-top: 15rem;
+    .person_personal_details{
+        flex: 0 0 25%;
+        width: 25%;
+        img{
+            width: 100% !important;
+            border-radius: 8px;
+            position: relative !important;
+            margin-bottom: 3rem;
+        }
+        h3{
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: var(--PrimaryColor);
+        }
+        .info_data{
+            margin-bottom: 2rem;
+            h4{
+                font-size: 2rem;
+                margin-bottom: 8px;
+            }
+        }
+    }
+    .person_main_details_wrapper{
+        flex: 0 0 75%;
+        width: 100%;
+        padding-left: 4rem;
+        h1{
+            margin-bottom: 3rem;
+        }
+        h4{
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+        p{
+            line-height: 2.2rem;
+            
+        }
+        .more{
+            color: var(--PrimaryColor);
+            margin-bottom: 3rem;
+            margin-top: 1rem;
+            display: block;
+            cursor: pointer;
+        }
+    }
+}
+
+@media only screen and (max-width:779px){
+    .person_list_details_wrap{
+        flex-wrap: wrap;
+        .person_personal_details{
+            flex: 0 0 100%;
+            width: 100%;
+            img{
+                width: 60% !important;
+            }
+            .info_data{
+                h4{
+                    font-size: 3rem;
+                }
+            }
+            
+        }
+        .person_main_details_wrapper{
+            flex: 0 0 100%;
+            width: 100%;
+            padding-left: 0;
+            h4{
+                font-size: 3rem;
+            }
+            p{
+                line-height: 19px;
+            }
+        }
+    }
+    
+}

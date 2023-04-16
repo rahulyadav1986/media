@@ -41,5 +41,16 @@ const SubItem2 = () =>{
         </>
     )
 }
+const SubItem3 = () =>{
+    return (
+        <>
+            <ul className={`${styles.submenu}`}>
+                <li>
+                    <Link href="/person">Popular</Link>
+                </li>                   
+            </ul>
+        </>
+    )
+}
 
-export {SubItem1, SubItem2}
+export {SubItem1, SubItem2, SubItem3}

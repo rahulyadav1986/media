@@ -45,15 +45,11 @@ const PopularDetails = ({MovieDetails, MovieDetailsTrailer, MovieDetailsKeywords
             </Head>                
             <div className="inner_movie_hero_wrapper" style={backDrop} >
                     <>
-                        {/* <Image className='backdrop' src={`${enviourment.image_base_url}/original${MovieDetails.backdrop_path}`} fill={true}  /> */}
-                        
                         <MainContainer>
                             <div className="main_area_content d-flex justify-content-between">
                                 <div className="movie_avator_back">
                                     <Image alt={MovieDetails.title} src={`${enviourment.image_base_url}/w400${MovieDetails.poster_path}`} fill={true}  />
-                                    <div className="movie_video_back d-flex align-items-center justify-content-center">
-                                        <Image  onClick={() =>setTrailers(!trailers)} loading="lazy" alt="icon" src="/images/playvid.png" fill={true} />
-                                    </div>
+                                    
                                 </div>
                                 <div className="content_area d-flex flex-column">
                                     <h1>{MovieDetails.title}</h1>
@@ -101,7 +97,14 @@ const PopularDetails = ({MovieDetails, MovieDetailsTrailer, MovieDetailsKeywords
                                         <li className='d-flex align-items-center'><Image loading="lazy" alt="icon" src="/images/like.png" fill={true} /> {MovieDetails.vote_count}</li>
                                     </ul>
                                     <div className='d-flex align-items-center buttons_wrap'>
-                                        <p>Tagline: <span className='highlight'>{MovieDetails.tagline}</span></p>
+                                        {
+                                            MovieDetails.tagline.length > 0 &&
+                                            <p>Tagline: <span className='highlight'>{MovieDetails.tagline}</span></p>
+                                        }                                        
+                                        <div className={`global_button`}  onClick={() =>setTrailers(!trailers)}>
+                                            <Image loading="lazy" alt="icon" src="/images/play.png" fill={true} />
+                                            watch now
+                                        </div>
                                     </div>                            
                                     <h3>Overview</h3>
                                     <p>{MovieDetails.overview}</p>
