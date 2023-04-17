@@ -25,9 +25,14 @@ const Casting = ({MovieDetailsCredits}) =>{
                                 return(
                                     <>
                                         <Link href={`/person/${item.id}`}key={i} className={styles.card_details}>
-                                            <div className={styles.card_image_item}>
-                                                <Image src={`${enviourment.image_base_url}/w300/${item.profile_path}`} fill={true} alt="" />
+                                            <div className={`${styles.card_image_item}`}>
+                                                <Image 
+                                                    src={`${item.profile_path !=null && item.profile_path != 'null' ? `${enviourment.image_base_url}/w300/${item.profile_path}`:"/images/placeholder.svg"}`} 
+                                                    fill={true} 
+                                                    alt="" 
+                                                />
                                             </div>
+                                            <h4>{item.name}</h4>
                                         </Link>                                         
                                     </>
                                 )

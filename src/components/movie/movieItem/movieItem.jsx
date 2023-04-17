@@ -13,7 +13,14 @@ const MovieItem = ({item})=>{
         <>
             <div className={`${styles.card_wrapper} card_wrapper`}>
                 <div className="image_wrapper">
-                    <Link href={`/movie/${item.id}`}><Image loading="lazy" src={`${enviourment.image_base_url}/w300${item.poster_path}`} fill={true} alt="" /></Link>
+                    <Link href={`/movie/${item.id}`}>
+                        <Image 
+                            loading="lazy"
+                            src={`${item.poster_path !==null && item.profile_path !== 'null' ? `${enviourment.image_base_url}/w300/${item.poster_path}`:"/images/placeholder.svg"}`}
+                            fill={true} 
+                            alt="" 
+                        />
+                    </Link>
                     <div className="circle_rating">
                         <CircleRating
                             rating={Math.floor(ratingava().toFixed(1))}

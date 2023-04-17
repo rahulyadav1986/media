@@ -33,10 +33,15 @@
             color: var(--PrimaryColor);
         }
         .info_data{
-            margin-bottom: 2rem;
+            margin-bottom: 0;
             h4{
-                font-size: 2rem;
+                font-size: 18px;
                 margin-bottom: 8px;
+                color: var(--PrimaryColor);
+                font-weight: 600;
+            }
+            p{
+                font-size: 14px;
             }
         }
     }
@@ -114,5 +119,13 @@
         .grid{
             grid-template-columns: repeat(2, 1fr);
         }
+    }
+}
+
+.personal_details_info_wrapper{
+    background-color: var(--DarkColor);
+    li{
+        padding: 1rem;
+        border-bottom: var(--SecondaryColor) 1px solid;
     }
 }

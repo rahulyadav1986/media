@@ -42,7 +42,7 @@ export default Person
 
 
 export async function getServerSideProps(){
-    const PageNo = 1
+    const PageNo = 2
     const responssPersonList = await fetch(`${enviourment.apiUrl}/person/popular?api_key=${enviourment.tmdbApiKey}&page=${PageNo}`);
     const PersonListData = await responssPersonList.json();
     return{
