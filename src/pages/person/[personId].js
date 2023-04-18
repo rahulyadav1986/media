@@ -58,6 +58,17 @@ const CastDetails = ({CastDetailsData, PersonDetailsData})=>{
                         }
                         <ul className={styles.personal_details_info_wrapper}>
                             {
+                                PersonDetailsData.name !==null && PersonDetailsData.name !== 'null' ?
+                                <li>
+                                    <div className={styles.info_data}>
+                                        <h4>Name</h4>
+                                        <p>{PersonDetailsData.name}</p>
+                                    </div>
+                                </li>                                
+                                :
+                                ""
+                            }
+                            {
                                 PersonDetailsData.known_for_department !==null && PersonDetailsData.known_for_department !== 'null' ?
                                 <li>
                                     <div className={styles.info_data}>
@@ -73,7 +84,7 @@ const CastDetails = ({CastDetailsData, PersonDetailsData})=>{
                                 <li>
                                     <div className={styles.info_data}>
                                         <h4>Gender</h4>
-                                        <p>{PersonDetailsData.gender !== 1 ? 'Female' : 'Male'}</p>
+                                        <p>{PersonDetailsData.gender !== 1 ? 'Male' : 'Female'}</p>
                                     </div>
                                 </li>                                
                                 :
@@ -146,7 +157,6 @@ const CastDetails = ({CastDetailsData, PersonDetailsData})=>{
                         
                     </div>
                     <div className={styles.person_main_details_wrapper}>
-                        <h1>{PersonDetailsData.name}</h1>
                         {
                             PersonDetailsData.biography !=="" && PersonDetailsData.biography !==null && PersonDetailsData.biography !=='null' ?
                             <>
@@ -156,31 +166,42 @@ const CastDetails = ({CastDetailsData, PersonDetailsData})=>{
                                         more ? 
                                         PersonDetailsData.biography                                
                                         :
-                                        PersonDetailsData.biography.substring(0, 250,) + '...'
+                                        PersonDetailsData.biography.substring(0, 200,) + '...'
                                         
                                     }
                                 </p>
-                                <span className={`${styles.more}`} onClick={moreToggle}>                            {
-                                        more ? 'Read Less' : 'Read More'
-                                    }
-                                </span>
+                                {
+                                    PersonDetailsData.biography.length > 200 ?
+                                    <span className={`${styles.more}`} onClick={moreToggle}>{more ? 'Read Less' : 'Read More'}</span>
+                                    :
+                                    ""
+                                }
+                                
                             </>
                             :
                             ""
 
                         }
-                        
                         <h4>Known For</h4>
-                        <Carousel breakPoints={breakPoints}>
-                            {
-                                CastDetailsData.cast.map((item,i)=>{                                        
-                                    return(
-                                        !loading ? <MovieSkeletonCard /> : <MovieItem key={i} item = {item} />
-                                        
-                                    )
-                                })
-                            }
-                        </Carousel>
+                        {
+                            CastDetailsData.cast.length > 0 ? 
+                            <>
+                                <Carousel breakPoints={breakPoints}>
+                                    {
+                                        CastDetailsData.cast.map((item,i)=>{                                        
+                                            return(
+                                                !loading ? <MovieSkeletonCard /> : <MovieItem key={i} item = {item} />
+                                                
+                                            )
+                                        })
+                                    }
+                                </Carousel>
+                            </>
+                            :
+                            <div className='no-data'>No movie's data available right now for this person</div>
+                        }
+                        
+                        
                     </div>
                 </div>
             </MainContainer>

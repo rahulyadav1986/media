@@ -19,32 +19,28 @@ const MovieSimilar = ({MovieDetailsSimilarData})=>{
       ];
     return(
         <>
-            <div className={`${styles.upcoming_wrapper} ptLarge `}>
+            {
+                MovieDetailsSimilarData.results.length > 0 ? 
+                <div className={`${styles.upcoming_wrapper} ptLarge `}>
+                    <h3>Similar Movies</h3>
+                    <div className={`${styles.main_wrapper} d-flex justify-content-between`}>                        
+                        <div className={`${styles.details_area} d-flex scroll_area`}>
+                            <Carousel breakPoints={breakPoints}>
+                                {
+                                    MovieDetailsSimilarData.results.map((item,i)=>{
+                                        return(
+                                            !loading ? <MovieSkeletonCard /> : <MovieItem key={i} item = {item} />
+                                        )
+                                    })
+                                }
+                            </Carousel>                            
+                        </div>                        
+                    </div>
+                </div>
+                :
+                ""
                 
-                {
-                   MovieDetailsSimilarData.results.length > 0 ?  
-                   <>
-                        <h3>Similar Movies</h3>
-                        <div className={`${styles.main_wrapper} d-flex justify-content-between`}>                        
-                            <div className={`${styles.details_area} d-flex scroll_area`}>
-                                <Carousel breakPoints={breakPoints}>
-                                    {
-                                        MovieDetailsSimilarData.results.map((item,i)=>{
-                                            return(
-                                                !loading ? <MovieSkeletonCard /> : <MovieItem key={i} item = {item} />
-                                            )
-                                        })
-                                    }
-                                </Carousel>                            
-                            </div>                        
-                        </div>
-                   </>
-                   :
-                   ""
-                }
-                
-                
-            </div>
+             }
         </>
     )
 }

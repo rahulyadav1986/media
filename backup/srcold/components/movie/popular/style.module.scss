@@ -1,0 +1,46 @@
+.popular_wrapper{
+    width: 100%;
+    .main_wrapper{
+        width: 100%;
+        flex-wrap: wrap;
+        .heading_area{
+            flex: 0 0 30.8593%;
+            width: 30.8593%;
+            height: 52.2rem;
+            border-radius: 8px;
+            background-image: url(../../../../public//images//heading_bubble.png);
+            background-position: right bottom;
+            background-repeat: no-repeat;
+        }
+        .details_area{
+            flex: 0 0 65.468%;
+            width: 65.468%;
+            padding-top: 0;
+            padding-left: 0;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            img{
+                width: 100% !important;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width:779px){
+    .popular_wrapper{
+        .main_wrapper{
+            .heading_area{
+                flex: 0 0 100%;
+                width: 100%;
+                height: auto;
+                margin-bottom: 5rem;
+                order: 1;
+            }
+            .details_area{
+                flex: 0 0 100%;
+                width: 100%;
+                order: 2;
+            }
+        }
+    }
+}

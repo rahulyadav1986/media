@@ -49,7 +49,7 @@ const MovieTopRated = ({MovieTopRatedData})=>{
                                 extraText="to" 
                                 highlightedTtile="Watch Now"
                                 descriptionText="Most watched movies by days"
-                                src={`/movie/popular`}
+                                src={`/movie/top-rated`}
                                 buttonText="View All" 
                             />
                         </div>

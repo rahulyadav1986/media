@@ -27,7 +27,7 @@ const MovieNowPlaying = ({MoviePopularData})=>{
                                 extraText="to" 
                                 highlightedTtile="Watch Now"
                                 descriptionText="Most watched movies by days"
-                                src={`/movie/popular`}
+                                src={`/movie/now-playing`}
                                 buttonText="View All" 
                             />
                         </div>

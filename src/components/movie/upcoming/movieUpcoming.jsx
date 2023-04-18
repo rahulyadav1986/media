@@ -30,11 +30,6 @@ const MovieUpcoming = ({MovieUpcomingData})=>{
                             <Carousel breakPoints={breakPoints}>
                                 {
                                     MovieUpcomingData.results.slice(4,14).map((item,i)=>{
-                                        const ratingava = ()=>{
-                                            return(
-                                                item.vote_average * 10
-                                            )
-                                        }
                                         return(
                                             !loading ? <MovieSkeletonCard /> : <MovieItem key={i} item = {item} />
                                         )
@@ -48,7 +43,7 @@ const MovieUpcoming = ({MovieUpcomingData})=>{
                                 extraText="to" 
                                 highlightedTtile="Watch Now"
                                 descriptionText="Most watched movies by days"
-                                src={`/movie/popular`}
+                                src={`/movie/upcoming`}
                                 buttonText="View All" 
                             />
                         </div>

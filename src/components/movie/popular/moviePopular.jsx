@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { MovieSkeletonCard } from '@/components/shared/skeletons/skeletons';
 import Carousel from "react-elastic-carousel";
 import MovieItem from '../movieItem/movieItem';
-const MoviePopular = ({MoviePopularData, item})=>{
+const MoviePopular = ({MoviePopularData})=>{
     const [loading, setLoading] = useState(false);
     useEffect(()=>{
         setTimeout(() => setLoading(true), 2000);

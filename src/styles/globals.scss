@@ -5,7 +5,7 @@
   --SecondaryColor: rgb(29,30,31);
   --CommonColor: rgb(25,26,29);
   --DarkColor: rgb(5,5,5);
-  --WhiteColor: rgb(233,231,231);
+  --WhiteColor: rgba(255, 255, 255, 0.7);;
   --GradiendColor: 31.5, 31.5, 52.5;
   --TitleFont: 'Barlow', sans-serif;
   --BodyFont: 'Lato', sans-serif;
@@ -492,8 +492,9 @@ a{
       width: 75%;
       padding-left: 4rem;
       p{
-        font-size: 1.6rem;
-        line-height: 2rem;
+        font-size: 14px;
+        color: rgba(255,255,255,.7);
+        line-height: 24px;
       }
       h1{
         font-size: 4rem;
@@ -808,6 +809,46 @@ a{
   height: 40rem;
 }
 
+.filter_tab{
+  border: rgba(255,255,255,.1) 1px solid;
+  border-radius: 20px;
+  margin-right: 2rem;
+  overflow: hidden;
+  li{    
+    color: var(--WhiteColor);
+    text-align: center;
+    text-transform: capitalize;
+    font-size: 14px;
+    cursor: pointer;
+    position: relative;
+    button{
+      padding: 0;
+      background-color: transparent;
+      color: var(--WhiteColor);
+      outline-style: none;
+      border: none;
+      width: auto;
+      height: auto;
+      cursor: pointer;
+      padding: 10px 2rem;
+      text-transform: capitalize;
+    }
+    z-index: 1;
+    &.active{
+      &::before{
+        width: 100%;
+        height: 100%;
+        background-color: var(--PrimaryColor);
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        z-index: -1;
+      }
+    }
+  }
+}
+
 .row_movie_wrapper{
   width: 100%;
   padding-top: 15rem;
@@ -816,14 +857,20 @@ a{
     .filter_area{
       margin-bottom: 2rem;
       select{
-        width: 20rem;
-        background-color: var(--DarkColor);
-        height: 40px;
-        padding:0 2rem;
+        width: 10rem;
+        background-color: transparent;
+        text-transform: capitalize;
+        height: 30px;
+        padding:0 1rem;
         outline-style: none;
         border: none;
         color: var(--WhiteColor);
         border-radius: 5px;
+        border: rgba(255,255,255,.1) 1px solid;
+        option{
+          background-color: #000;
+          padding: 1rem;
+        }
       }
     }
   }
@@ -962,5 +1009,17 @@ a{
   }
   .pagination{
     display: none;
+  }
+}
+
+.no-data{
+  padding: 2rem;
+  background-color: var(--DarkColor);
+}
+
+.filter_area{
+  button{
+    width: 100px;
+    height: 40px;
   }
 }

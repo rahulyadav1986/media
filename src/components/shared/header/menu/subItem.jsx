@@ -6,6 +6,9 @@ const SubItem1 = () =>{
         <>
             <ul className={`${styles.submenu}`}>
                 <li>
+                    <Link href="/movie/trending">Trending</Link>
+                </li>
+                <li>
                     <Link href="/movie/popular">Popular</Link>
                 </li>
                 <li>

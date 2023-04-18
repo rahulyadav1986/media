@@ -62,6 +62,10 @@ const Popular = ()=>{
         setPopularData(dataFromServe)
         
     }
+
+    const changeView =()=>{
+        
+    }
     return(
         <>
             <Head>
@@ -108,7 +112,7 @@ const Popular = ()=>{
                         nextLabel = ""
                         breakLabel = "..."
                         pageRangeDisplayed={3}
-                        pageCount={popularData?.total_pages}
+                        pageCount={500}
                         onPageChange={handleClick}
                         breakClassName="breakline"
                         breakLinkClassName="breakline_link"

@@ -1,0 +1,71 @@
+.menu_wrapper{
+    margin: 0;
+    li{
+        font-size: 16px;
+        margin-right: 3rem;
+        padding-right: 14px;
+        text-transform: capitalize;
+        position: relative;
+        font-family: var(--TitleFont); 
+        font-weight: 700;
+        cursor: pointer;
+        &:last-child{
+           
+            .submenu{
+                left: auto;
+                right: 0;
+                &::before{
+                    left: auto;
+                    right: 28px;
+                }
+            }
+        }
+        .submenu{
+            position: absolute;
+            top: calc(100% + 15px);
+            left: 0;
+            width: 25rem;
+            background-color: var(--DarkColor); 
+            border-radius: 5px; 
+            &::before{
+                width: 10px;
+                height: 7px;
+                background-color: var(--DarkColor); ;
+                position: absolute;
+                top: -7px;
+                left: 28px;
+                content: "";
+                clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            }          
+            li{                
+                margin: 0;
+                border-bottom: rgba(255,255,255,.05) 1px solid;                
+                width: 100%;
+                &::before{
+                    display: none
+                }
+                a{
+                    width: 100%;
+                    padding: 10px 0 10px 15px;
+                    font-size: 13px;
+                    display: block;
+                }
+            }
+        }
+        &::before{
+            width: 7px;
+            height: 5px;
+            background-image: url(../../../../../public/images/caret.png);
+            position: absolute;
+            top: 4px;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            content: "";
+        }
+        &:last-child{
+            margin-right: 0;
+        }
+    }
+}
+
