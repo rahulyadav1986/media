@@ -4,12 +4,60 @@ import { useEffect, useState } from "react";
 import { enviourment } from 'next.config';
 import MainContainer from "@/components/shared/mainContainer/mainContainer";
 import Head from "next/head";
+import ReactPaginate from "react-paginate";
+import Image from "next/image";
 
-const Upcoming = ({MoviePopularData})=>{
+const Upcoming = ()=>{
+    const [upcoimgData, setupcoimgData] = useState(null);
+    const [pageCount,setPageCount] = useState(1);
     const [loading, setLoading] = useState(false);
+    const url = `${enviourment.apiUrl}/movie/upcoming?api_key=${enviourment.tmdbApiKey}`;
+    const NextPage = ()=>{
+        setPageCount(pageCount + 1)
+        console.log(pageCount + 1)
+        setTimeout(() => setLoading(true), 2000);
+        fetch(url + `&page=${pageCount + 1}`)
+        .then(response => response.json())
+        .then(upcoimgData => {
+            setupcoimgData(upcoimgData)
+            console.log(upcoimgData)
+        })
+        setLoading(false)
+    }
+    const PrevPage = ()=>{
+        setPageCount(pageCount - 1)
+        console.log(pageCount - 1)
+        setTimeout(() => setLoading(true), 2000);
+        fetch(url + `&page=${pageCount - 1}`)
+        .then(response => response.json())
+        .then(upcoimgData => {
+            setupcoimgData(upcoimgData)
+            console.log(upcoimgData)
+        })
+    }
+   
     useEffect(()=>{
         setTimeout(() => setLoading(true), 2000);
-    })
+        fetch(url + `&page=${pageCount}`)
+        .then(response => response.json())
+        .then(upcoimgData => {
+            setupcoimgData(upcoimgData)
+            console.log(upcoimgData)
+        })
+    },[])
+    const getData = async(pageCount)=>{
+        setTimeout(() => setLoading(true), 2000);
+        const upcoimgDataResponse = await fetch(`${enviourment.apiUrl}/movie/upcoming?api_key=${enviourment.tmdbApiKey}&page=${pageCount}`)
+        const ActualData = await upcoimgDataResponse.json()
+        return ActualData
+    }
+    const handleClick = async(data)=>{
+        console.log(data)        
+        const currentPage = data.selected + 1
+        const dataFromServe = await getData(currentPage)
+        setupcoimgData(dataFromServe)
+        
+    }
     return(
         <>
             <Head>
@@ -27,7 +75,7 @@ const Upcoming = ({MoviePopularData})=>{
                         </div>
                         <div className="grid">
                             {
-                                MoviePopularData.results.map((item,i)=>{                                        
+                                upcoimgData?.results.map((item,i)=>{                                        
                                     return(
                                         !loading ? <MovieInnerSkeletonCard /> : 
                                         <div className="portion">
@@ -39,7 +87,36 @@ const Upcoming = ({MoviePopularData})=>{
                         </div>
                     </div>
                 </div>
-                
+                <div className="next_prev_button_wrapper d-flex align-items-center justify-content-center">
+                    {
+                        pageCount > 1 ?
+                        <button className="prev" onClick={PrevPage}><Image src="/images/left.png" fill={true} alt="icon" /> Prev</button>
+                        :
+                        <button className="prev" disabled><Image src="/images/left.png" fill={true} alt="icon" /> Prev</button>
+                    }                    
+                    <span className="pageCount">{pageCount}</span> of <span className="TotalpageCount">{upcoimgData?.total_pages}</span>
+                    <button className="next" onClick={NextPage}>Next <Image src="/images/right.png" fill={true} alt="icon" /></button>
+                </div>
+
+                <div className="pagination_wrapper">
+                    <ReactPaginate
+                        previousLabel =""
+                        nextLabel = ""
+                        breakLabel = "..."
+                        pageRangeDisplayed={3}
+                        pageCount={upcoimgData?.total_pages}
+                        onPageChange={handleClick}
+                        breakClassName="breakline"
+                        breakLinkClassName="breakline_link"
+                        pageClassName="page_item"
+                        pageLinkClassName="page_item_link"
+                        activeClassName="page_item_active"
+                        activeLinkClassName="page_item_link_active"
+                        previousClassName="previous"
+                        nextClassName="next"
+                        containerClassName={'pagination'}
+                    />
+                </div>
             </MainContainer>
             
         </>
@@ -49,12 +126,12 @@ const Upcoming = ({MoviePopularData})=>{
 export default Upcoming;
 
 
-export async function getServerSideProps(){
-    const responssMoviePopular = await fetch(`${enviourment.apiUrl}/movie/popular?api_key=${enviourment.tmdbApiKey}`);
-    const MoviePopularData = await responssMoviePopular.json();
-    return{
-      props:{
-        MoviePopularData: MoviePopularData,
-      }
-    }
-  }
+// export async function getServerSideProps(){
+//     const responssMoviePopular = await fetch(`${enviourment.apiUrl}/movie/popular?api_key=${enviourment.tmdbApiKey}`);
+//     const MoviePopularData = await responssMoviePopular.json();
+//     return{
+//       props:{
+//         MoviePopularData: MoviePopularData,
+//       }
+//     }
+//   }

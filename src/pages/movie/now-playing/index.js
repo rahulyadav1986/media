@@ -4,12 +4,60 @@ import { useEffect, useState } from "react";
 import { enviourment } from 'next.config';
 import MainContainer from "@/components/shared/mainContainer/mainContainer";
 import Head from "next/head";
+import Image from "next/image";
+import ReactPaginate from 'react-paginate';
 
-const NowPlaying = ({NowPlayingData})=>{
+const NowPlaying = ()=>{
+    const [nowPlayingData, setNowPlayingData] = useState(null);
+    const [pageCount,setPageCount] = useState(1);
     const [loading, setLoading] = useState(false);
+    const url = `${enviourment.apiUrl}/movie/now_playing?api_key=${enviourment.tmdbApiKey}`;
+    const NextPage = ()=>{
+        setPageCount(pageCount + 1)
+        console.log(pageCount + 1)
+        setTimeout(() => setLoading(true), 2000);
+        fetch(url + `&page=${pageCount + 1}`)
+        .then(response => response.json())
+        .then(nowPlayingData => {
+            setNowPlayingData(nowPlayingData)
+            console.log(nowPlayingData)
+        })
+        setLoading(false)
+    }
+    const PrevPage = ()=>{
+        setPageCount(pageCount - 1)
+        console.log(pageCount - 1)
+        setTimeout(() => setLoading(true), 2000);
+        fetch(url + `&page=${pageCount - 1}`)
+        .then(response => response.json())
+        .then(nowPlayingData => {
+            setNowPlayingData(nowPlayingData)
+            console.log(nowPlayingData)
+        })
+    }
+   
     useEffect(()=>{
         setTimeout(() => setLoading(true), 2000);
-    })
+        fetch(url + `&page=${pageCount}`)
+        .then(response => response.json())
+        .then(nowPlayingData => {
+            setNowPlayingData(nowPlayingData)
+            console.log(nowPlayingData)
+        })
+    },[])
+    const getData = async(pageCount)=>{
+        setTimeout(() => setLoading(true), 2000);
+        const nowPlayingDataResponse = await fetch(`${enviourment.apiUrl}/movie/now_playing?api_key=${enviourment.tmdbApiKey}&page=${pageCount}`)
+        const ActualData = await nowPlayingDataResponse.json()
+        return ActualData
+    }
+    const handleClick = async(data)=>{
+        console.log(data)        
+        const currentPage = data.selected + 1
+        const dataFromServe = await getData(currentPage)
+        setNowPlayingData(dataFromServe)
+        
+    }
     return(
         <>
             <Head>
@@ -27,7 +75,7 @@ const NowPlaying = ({NowPlayingData})=>{
                         </div>
                         <div className="grid">
                             {
-                                NowPlayingData.results.map((item,i)=>{                                        
+                                nowPlayingData?.results.map((item,i)=>{                                        
                                     return(
                                         !loading ? <MovieInnerSkeletonCard /> : 
                                         <div className="portion">
@@ -39,6 +87,36 @@ const NowPlaying = ({NowPlayingData})=>{
                         </div>
                     </div>
                 </div>
+                <div className="next_prev_button_wrapper d-flex align-items-center justify-content-center">
+                    {
+                        pageCount > 1 ?
+                        <button className="prev" onClick={PrevPage}><Image src="/images/left.png" fill={true} alt="icon" /> Prev</button>
+                        :
+                        <button className="prev" disabled><Image src="/images/left.png" fill={true} alt="icon" /> Prev</button>
+                    }                    
+                    <span className="pageCount">{pageCount}</span> of <span className="TotalpageCount">{nowPlayingData?.total_pages}</span>
+                    <button className="next" onClick={NextPage}>Next <Image src="/images/right.png" fill={true} alt="icon" /></button>
+                </div>
+
+                <div className="pagination_wrapper">
+                    <ReactPaginate
+                        previousLabel =""
+                        nextLabel = ""
+                        breakLabel = "..."
+                        pageRangeDisplayed={3}
+                        pageCount={nowPlayingData?.total_pages}
+                        onPageChange={handleClick}
+                        breakClassName="breakline"
+                        breakLinkClassName="breakline_link"
+                        pageClassName="page_item"
+                        pageLinkClassName="page_item_link"
+                        activeClassName="page_item_active"
+                        activeLinkClassName="page_item_link_active"
+                        previousClassName="previous"
+                        nextClassName="next"
+                        containerClassName={'pagination'}
+                    />
+                </div>
             </MainContainer>
             
         </>
@@ -48,12 +126,12 @@ const NowPlaying = ({NowPlayingData})=>{
 export default NowPlaying;
 
 
-export async function getServerSideProps(){
-    const responssMovieNowPlaying = await fetch(`${enviourment.apiUrl}/movie/now_playing?api_key=${enviourment.tmdbApiKey}`);
-    const NowPlayingData = await responssMovieNowPlaying.json();
-    return{
-      props:{
-        NowPlayingData: NowPlayingData,
-      }
-    }
-  }
+// export async function getServerSideProps(){
+//     const responssMovieNowPlaying = await fetch(`${enviourment.apiUrl}/movie/now_playing?api_key=${enviourment.tmdbApiKey}`);
+//     const NowPlayingData = await responssMovieNowPlaying.json();
+//     return{
+//       props:{
+//         NowPlayingData: NowPlayingData,
+//       }
+//     }
+//   }

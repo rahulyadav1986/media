@@ -36,6 +36,7 @@ const Popular = ()=>{
             console.log(popularData)
         })
     }
+   
     useEffect(()=>{
         setTimeout(() => setLoading(true), 2000);
         fetch(url)
