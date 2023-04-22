@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import Moment from "react-moment";
-import { enviourment } from 'next.config';
+import { env } from 'next.config';
 const MovieLatest = ({HeroData})=>{
     const [tab, setTab] = useState(0);
     return(
@@ -31,7 +31,7 @@ const MovieLatest = ({HeroData})=>{
                                             <>
                                                 <div key={i} className={`${styles.tab_content_area} ${tab === i ? `${styles.active}` : "" } d-flex justify-content-between`}>
                                                     <div className={styles.image_area}>
-                                                        <Image loading="lazy" src={`${enviourment.image_base_url}/w500${item.poster_path}`} fill={true} alt={item.title} />
+                                                        <Image loading="lazy" src={`${env.image_base_url}/w500${item.poster_path}`} fill={true} alt={item.title} />
                                                     </div>
                                                     <div className={styles.content_area}>
                                                         <h3>{item.title}</h3>
@@ -64,7 +64,7 @@ const MovieLatest = ({HeroData})=>{
                                         return(
                                             <>
                                                 <li key={i} onClick={()=> setTab(i)} className={tab === i ? `${styles.active}` : ""}>
-                                                    <Image loading="lazy" src={`${enviourment.image_base_url}/w300${item.backdrop_path}`} fill={true} alt="demo" />
+                                                    <Image loading="lazy" src={`${env.image_base_url}/w300${item.backdrop_path}`} fill={true} alt="demo" />
                                                 </li>
                                             </>
                                         )

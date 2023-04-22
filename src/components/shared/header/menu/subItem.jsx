@@ -27,20 +27,23 @@ const SubItem1 = () =>{
 const SubItem2 = () =>{
     return (
         <>
-            {/* <ul className={`${styles.submenu}`}>
+            <ul className={`${styles.submenu}`}>
                 <li>
-                    <Link href="tv/popular">Popular</Link>
+                    <Link href="/tv/trending">Trending</Link>
                 </li>
                 <li>
-                    <Link href="tv/upcoming">Upcoming</Link>
+                    <Link href="/tv/popular">Popular</Link>
                 </li>
                 <li>
-                    <Link href="tv/top-rated">Top Rated</Link>
+                    <Link href="/tv/airing-today">Airing Today</Link>
                 </li>
                 <li>
-                    <Link href="tv/now-playing">Now Playing</Link>
+                    <Link href="/tv/on-air">On The Air</Link>
+                </li>
+                <li>
+                    <Link href="/tv/top-rated">Top rated</Link>
                 </li>                      
-            </ul> */}
+            </ul>
         </>
     )
 }
@@ -49,7 +52,10 @@ const SubItem3 = () =>{
         <>
             <ul className={`${styles.submenu}`}>
                 <li>
-                    <Link href="/person">Popular</Link>
+                    <Link href="/movie/person">Movie</Link>
+                </li>
+                <li>
+                    <Link href="/tv/person">Tv</Link>
                 </li>                   
             </ul>
         </>

@@ -27,6 +27,7 @@
             width: 25rem;
             background-color: var(--DarkColor); 
             border-radius: 5px; 
+            z-index: 9;
             &::before{
                 width: 10px;
                 height: 7px;

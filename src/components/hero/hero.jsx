@@ -2,7 +2,7 @@ import Image from "next/image";
 import styles from './style.module.scss';
 import MainContainer from "../shared/mainContainer/mainContainer";
 import Link from "next/link";
-import { enviourment } from 'next.config';
+import { env } from 'next.config';
 import { useEffect, useState } from "react";
 import { HeroSkeleton, HeroSkeletonCard } from "../shared/skeletons/skeletons";
 import Moment from 'react-moment';
@@ -21,7 +21,7 @@ const Hero = ({HeroData})=>{
                         return(
                             !loading ? <HeroSkeleton />:
                             <div key={i} className={`${styles.main_hero_item} ${tab === i ? `${styles.active}`: ``}`}>
-                                <Image loading="lazy" alt={item.title} className={styles.avator} src={`${enviourment.image_base_url}/original${item.backdrop_path}`}  fill={true} />
+                                <Image loading="lazy" alt={item.title} className={styles.avator} src={`${env.image_base_url}/original${item.backdrop_path}`}  fill={true} />
                                 <div className={`${styles.content_area} d-flex flex-column`}>
                                     <MainContainer>
                                         <h2>{item.title}</h2>
@@ -61,7 +61,7 @@ const Hero = ({HeroData})=>{
                                     HeroData.results.slice(0,4).map((item,i)=>{
                                         return(
                                             <li key={i} onClick={() => setTab(i)} className={tab === i ? `${styles.active}`: ""}>
-                                                <Image loading="lazy" alt={item.title} src={`${enviourment.image_base_url}/w300${item.poster_path}`} fill={true} />
+                                                <Image loading="lazy" alt={item.title} src={`${env.image_base_url}/w300${item.poster_path}`} fill={true} />
                                             </li>
                                         )
                                     })

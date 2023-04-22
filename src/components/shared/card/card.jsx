@@ -6,7 +6,7 @@ const Card = ({item})=>{
         <>
             <div className={styles.card_wrapper}>
                 <div className={styles.image_wrapper}>
-                    <Link href=""><Image loading="lazy" src={`${enviourment.image_base_url}/w300${item.poster_path}`} fill={true} alt="" /></Link>
+                    <Link href=""><Image loading="lazy" src={`${env.image_base_url}/w300${item.poster_path}`} fill={true} alt="" /></Link>
                 </div>
                 <Link href=""><h3>{item.title}</h3></Link>
                 <ul className={`${styles.widget} d-flex justify-content-between`}>

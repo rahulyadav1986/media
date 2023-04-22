@@ -1,6 +1,6 @@
 import CircleRating from '@/components/shared/circleRating/circleRating';
 import MainContainer from '@/components/shared/mainContainer/mainContainer';
-import { enviourment } from 'next.config';
+import { env } from 'next.config';
 import Head from 'next/head';
 import Image from 'next/image';
 import Moment from 'react-moment';
@@ -30,7 +30,7 @@ const PopularDetails = ({MovieDetails, MovieDetailsTrailer, MovieDetailsKeywords
       
 
       const backDrop = {
-            backgroundImage: `url(${enviourment.image_base_url}/original${MovieDetails.backdrop_path})`,
+            backgroundImage: `url(${env.image_base_url}/original${MovieDetails.backdrop_path})`,
       }
     
     return(
@@ -42,7 +42,7 @@ const PopularDetails = ({MovieDetails, MovieDetailsTrailer, MovieDetailsKeywords
                 <meta name="keywords" content={MovieDetailsKeywords?.keywords.map((item)=>{return(item.name)})}></meta>
                 <link 
                     rel="icon" 
-                    href={`${MovieDetails.poster_path !==null && MovieDetails.poster_path !=='null' ? `${enviourment.image_base_url}/w400${MovieDetails.poster_path}` : "/images/favicon.png"}`} 
+                    href={`${MovieDetails.poster_path !==null && MovieDetails.poster_path !=='null' ? `${env.image_base_url}/w400${MovieDetails.poster_path}` : "/images/favicon.ico"}`} 
                 />
             </Head>                
             <div className="inner_movie_hero_wrapper" style={backDrop} >
@@ -53,7 +53,7 @@ const PopularDetails = ({MovieDetails, MovieDetailsTrailer, MovieDetailsKeywords
                                 <Image 
                                     alt={MovieDetails.title} 
                                     src={`${MovieDetails.poster_path !==null && MovieDetails.poster_path !=='null' ? 
-                                    `${enviourment.image_base_url}/w400${MovieDetails.poster_path}` : "/images/placeholder.svg"}`} 
+                                    `${env.image_base_url}/w400${MovieDetails.poster_path}` : "/images/placeholder.svg"}`} 
                                     fill={true}  
                                 />
                                 
@@ -196,13 +196,13 @@ export default PopularDetails
 
 export async function getServerSideProps(context){
     const {params} = context;
-    const responssMoviePopular = await fetch(`${enviourment.apiUrl}/movie/${params.movieId}?api_key=${enviourment.tmdbApiKey}`);
-    const responssMovieVideo = await fetch(`${enviourment.apiUrl}/movie/${params.movieId}/videos?api_key=${enviourment.tmdbApiKey}`);
-    const responssMovieKeywords = await fetch(`${enviourment.apiUrl}/movie/${params.movieId}/keywords?api_key=${enviourment.tmdbApiKey}`);
-    const responssMovieCredits = await fetch(`${enviourment.apiUrl}/movie/${params.movieId}/credits?api_key=${enviourment.tmdbApiKey}`);
-    const responssMovieRecomemded = await fetch(`${enviourment.apiUrl}/movie/${params.movieId}/recommendations?api_key=${enviourment.tmdbApiKey}`);
-    const responssMovieSimilar = await fetch(`${enviourment.apiUrl}/movie/${params.movieId}/similar?api_key=${enviourment.tmdbApiKey}`);
-    const responssReviews = await fetch(`${enviourment.apiUrl}/movie/${params.movieId}/reviews?api_key=${enviourment.tmdbApiKey}`);
+    const responssMoviePopular = await fetch(`${env.apiUrl}/movie/${params.movieId}?api_key=${env.tmdbApiKey}`);
+    const responssMovieVideo = await fetch(`${env.apiUrl}/movie/${params.movieId}/videos?api_key=${env.tmdbApiKey}`);
+    const responssMovieKeywords = await fetch(`${env.apiUrl}/movie/${params.movieId}/keywords?api_key=${env.tmdbApiKey}`);
+    const responssMovieCredits = await fetch(`${env.apiUrl}/movie/${params.movieId}/credits?api_key=${env.tmdbApiKey}`);
+    const responssMovieRecomemded = await fetch(`${env.apiUrl}/movie/${params.movieId}/recommendations?api_key=${env.tmdbApiKey}`);
+    const responssMovieSimilar = await fetch(`${env.apiUrl}/movie/${params.movieId}/similar?api_key=${env.tmdbApiKey}`);
+    const responssReviews = await fetch(`${env.apiUrl}/movie/${params.movieId}/reviews?api_key=${env.tmdbApiKey}`);
 
     const MoviePopularData = await responssMoviePopular.json();
     const MoviePopularTrailerData = await responssMovieVideo.json();

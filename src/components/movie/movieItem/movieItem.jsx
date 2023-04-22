@@ -2,7 +2,7 @@ import Link from 'next/link'
 import styles from './style.module.scss'
 import CircleRating from '@/components/shared/circleRating/circleRating'
 import Image from 'next/image'
-import { enviourment } from 'next.config';
+import { env } from 'next.config';
 const MovieItem = ({item})=>{
     const ratingava = ()=>{
         return(
@@ -16,7 +16,7 @@ const MovieItem = ({item})=>{
                     <Link href={`/movie/${item.id}`}>
                         <Image 
                             loading="lazy"
-                            src={`${item.poster_path !==null && item.profile_path !== 'null' ? `${enviourment.image_base_url}/w300/${item.poster_path}`:"/images/placeholder.svg"}`}
+                            src={`${item.poster_path !==null && item.profile_path !== 'null' ? `${env.image_base_url}/w300/${item.poster_path}`:"/images/placeholder.svg"}`}
                             fill={true} 
                             alt="" 
                         />

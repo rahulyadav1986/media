@@ -1,7 +1,7 @@
 import MovieItem from "@/components/movie/movieItem/movieItem";
 import { MovieInnerSkeletonCard } from "@/components/shared/skeletons/skeletons";
 import { useEffect, useState } from "react";
-import { enviourment } from 'next.config';
+import { env } from 'next.config';
 import MainContainer from "@/components/shared/mainContainer/mainContainer";
 import Head from "next/head";
 import Image from "next/image";
@@ -9,13 +9,13 @@ import ReactPaginate from 'react-paginate';
 
 
 const Trending = ()=>{
-    const [popularData, setPopularData] = useState(null);
+    const [trendingData, settrendingData] = useState(null);
     const [pageCount,setPageCount] = useState(1);
     const [loading, setLoading] = useState(false);
-    const [mediaType, setMediaType] =useState('all');
+    const [mediaType, setMediaType] =useState('movie');
     const [timeWindow, setTimeWindow] =useState('day');
     const [filterActive, setFilterActive] = useState(0);
-    const url = `${enviourment.apiUrl}/trending/${mediaType}/${timeWindow}?api_key=${enviourment.tmdbApiKey}`;
+    const url = `${env.apiUrl}/trending/${mediaType}/${timeWindow}?api_key=${env.tmdbApiKey}`;
     const mainday = [
         {
             day: 'day'
@@ -30,9 +30,9 @@ const Trending = ()=>{
         setTimeout(() => setLoading(true), 2000);
         fetch(url + `&page=${pageCount + 1}`)
         .then(response => response.json())
-        .then(popularData => {
-            setPopularData(popularData)
-            console.log(popularData)
+        .then(trendingData => {
+            settrendingData(trendingData)
+            console.log(trendingData)
         })
         setLoading(false)
     }
@@ -42,26 +42,26 @@ const Trending = ()=>{
         setTimeout(() => setLoading(true), 2000);
         fetch(url + `&page=${pageCount - 1}`)
         .then(response => response.json())
-        .then(popularData => {
-            setPopularData(popularData)
-            console.log(popularData)
+        .then(trendingData => {
+            settrendingData(trendingData)
+            console.log(trendingData)
         })
     }
    
     useEffect(()=>{
         setTimeout(() => setLoading(true), 2000);
-        fetch(url + `&page=${pageCount}`)
+        fetch(`${env.apiUrl}/trending/movie/day?api_key=${env.tmdbApiKey}&page=1`)
         .then(response => response.json())
-        .then(popularData => {
-            setPopularData(popularData)
-            console.log(popularData)
+        .then(trendingData => {
+            settrendingData(trendingData)
+            console.log(trendingData)
         })
     },[])
 
     const getData = async(pageCount)=>{
         setTimeout(() => setLoading(true), 2000);
-        const PopularDataResponse = await fetch(`${enviourment.apiUrl}/trending/${mediaType}/${timeWindow}?api_key=${enviourment.tmdbApiKey}&page=${pageCount}`)
-        const ActualData = await PopularDataResponse.json()
+        const trendingDataResponse = await fetch(`${env.apiUrl}/trending/movie/${timeWindow}?api_key=${env.tmdbApiKey}&page=${pageCount}`)
+        const ActualData = await trendingDataResponse.json()
         return ActualData
     }
         
@@ -70,32 +70,35 @@ const Trending = ()=>{
         console.log(data)        
         const currentPage = data.selected + 1
         const dataFromServe = await getData(currentPage)
-        setPopularData(dataFromServe)
+        settrendingData(dataFromServe)
         
     }
 
-    const changeMediaType = (e)=>{  
-        const setMediaType = e.target.value
-        console.log(`${enviourment.apiUrl}/trending/${setMediaType}/${timeWindow}?api_key=${enviourment.tmdbApiKey}`)
-        fetch(`${enviourment.apiUrl}/trending/${setMediaType}/${timeWindow}?api_key=${enviourment.tmdbApiKey}`)
-        .then(response => response.json())
-        .then(popularData => {
-            setPopularData(popularData)
-            console.log(popularData)
-        })
+    // const changeMediaType = (e)=>{  
+    //     const setMediaType = e.target.value
+    //     console.log(`${env.apiUrl}/trending/${setMediaType}/${timeWindow}?api_key=${env.tmdbApiKey}`)
+    //     fetch(`${env.apiUrl}/trending/${setMediaType}/${timeWindow}?api_key=${env.tmdbApiKey}`)
+    //     .then(response => response.json())
+    //     .then(trendingData => {
+    //         settrendingData(trendingData)
+    //         console.log(trendingData)
+    //     })
         
-    }
+    // }
     const changeTimeWindowType = (e)=>{  
         const setTimeWindowType = e.target.value
-        console.log(`${enviourment.apiUrl}/trending/all/${setTimeWindowType}?api_key=${enviourment.tmdbApiKey}`)
-        fetch(`${enviourment.apiUrl}/trending/all/${setTimeWindowType}?api_key=${enviourment.tmdbApiKey}`)
+        console.log(`${env.apiUrl}/trending/all/${setTimeWindowType}?api_key=${env.tmdbApiKey}`)
+        fetch(`${env.apiUrl}/trending/all/${setTimeWindowType}?api_key=${env.tmdbApiKey}`)
         .then(response => response.json())
-        .then(popularData => {
-            setPopularData(popularData)
-            console.log(popularData)
+        .then(trendingData => {
+            settrendingData(trendingData)
+            console.log(trendingData)
         })
 
         
+    }
+    const HeroBackDrop = {
+        backgroundImage : `url(${env.image_base_url}/original/${trendingData?.results?.[Math.floor(Math.random() * 20)]?.backdrop_path})`
     }
     
     return(
@@ -105,85 +108,94 @@ const Trending = ()=>{
                 <meta name="description" content="Generated by create next app" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <meta name="keywords"></meta>
-                <link rel="icon" href="/favicon.ico" />
+                <link rel="icon" href="/images/favicon.ico" />
             </Head>
-            <MainContainer>
-                <div className="row_movie_wrapper"> 
-                    <div className="main_grid_wrapper">
-                        <div className="filter_area d-flex justify-content-between">
+            {
+                loading ? 
+                <>
+                    <div className="inner_hero_bg" style={HeroBackDrop}> 
+                        <MainContainer>
                             <h1>Trending Movies</h1>
-                            <div className="d-flex align-items-center">
-                                <ul className="filter_tab d-flex align-items-center">
+                        </MainContainer>
+                    </div>
+                    <MainContainer>
+                        <div className="row_movie_wrapper"> 
+                            <div className="main_grid_wrapper">
+                                    <div className="d-flex align-items-center justify-content-end">
+                                        <ul className="filter_tab d-flex align-items-center">
+                                            {
+                                                mainday.map((item,i)=>{
+                                                    return(
+                                                        <>
+                                                            <li onClick={()=>setFilterActive(i)} className={filterActive === i ? 'active' : ''}><button onClick={changeTimeWindowType} value={item.day} >{item.day}</button></li>
+                                                        </>
+                                                    )
+                                                })
+                                            }
+                                        </ul>
+                                        {/* <select onChange={changeMediaType} name="" id="">
+                                            <option value="all">all</option>
+                                            <option value="movie">movie</option>
+                                            <option value="tv">tv</option>
+                                        </select> */}
+                                    </div>
+                                    
+                                    {/* <button onClick={changeMediaType} value="tv">tv</button>
+                                    <button onClick={changeMediaType} value="movie">Movies</button>
+                                    <button onClick={changeMediaType} value="all">All</button> */}
+                                <div className="grid">
                                     {
-                                        mainday.map((item,i)=>{
+                                        trendingData?.results.map((item,i)=>{                                        
                                             return(
-                                                <>
-                                                    <li onClick={()=>setFilterActive(i)} className={filterActive === i ? 'active' : ''}><button onClick={changeTimeWindowType} value={item.day} >{item.day}</button></li>
-                                                </>
+                                                <div key={i} className="portion">
+                                                    <MovieItem item ={item} />
+                                                </div>                
                                             )
                                         })
                                     }
-                                </ul>
-                                <select onChange={changeMediaType} name="" id="">
-                                    <option value="all">all</option>
-                                    <option value="movie">movie</option>
-                                    <option value="tv">tv</option>
-                                </select>
+                                </div>
                             </div>
-                            
-                            {/* <button onClick={changeMediaType} value="tv">tv</button>
-                            <button onClick={changeMediaType} value="movie">Movies</button>
-                            <button onClick={changeMediaType} value="all">All</button> */}
                         </div>
-                        <div className="grid">
+                        <div className="next_prev_button_wrapper d-flex align-items-center justify-content-center">
                             {
-                                popularData?.results.map((item,i)=>{                                        
-                                    return(
-                                        !loading ? <MovieInnerSkeletonCard /> : 
-                                        <div className="portion">
-                                            <MovieItem key={i} item ={item} />
-                                        </div>                         
-                                    )
-                                })
-                            }
+                                pageCount > 1 ?
+                                <button className="prev" onClick={PrevPage}><Image src="/images/left.png" fill={true} alt="icon" /> Prev</button>
+                                :
+                                <button className="prev" disabled><Image src="/images/left.png" fill={true} alt="icon" /> Prev</button>
+                            }                    
+                            <span className="pageCount">{pageCount}</span> of <span className="TotalpageCount">{trendingData?.total_pages}</span>
+                            <button className="next" onClick={NextPage}>Next <Image src="/images/right.png" fill={true} alt="icon" /></button>
                         </div>
-                    </div>
-                </div>
-                <div className="next_prev_button_wrapper d-flex align-items-center justify-content-center">
-                    {
-                        pageCount > 1 ?
-                        <button className="prev" onClick={PrevPage}><Image src="/images/left.png" fill={true} alt="icon" /> Prev</button>
-                        :
-                        <button className="prev" disabled><Image src="/images/left.png" fill={true} alt="icon" /> Prev</button>
-                    }                    
-                    <span className="pageCount">{pageCount}</span> of <span className="TotalpageCount">{popularData?.total_pages}</span>
-                    <button className="next" onClick={NextPage}>Next <Image src="/images/right.png" fill={true} alt="icon" /></button>
-                </div>
 
-                <div className="pagination_wrapper">
-                    <ReactPaginate 
-                        previousLabel =""
-                        nextLabel = ""
-                        breakLabel = "..."
-                        pageRangeDisplayed={3}
-                        pageCount={popularData?.total_pages}
-                        onPageChange={handleClick}
-                        breakClassName="breakline"
-                        breakLinkClassName="breakline_link"
-                        pageClassName="page_item"
-                        pageLinkClassName="page_item_link"
-                        activeClassName="page_item_active"
-                        activeLinkClassName="page_item_link_active"
-                        previousClassName="previous"
-                        nextClassName="next"
-                        containerClassName={'pagination'}
-                    />
+                        <div className="pagination_wrapper">
+                            <ReactPaginate 
+                                previousLabel =""
+                                nextLabel = ""
+                                breakLabel = "..."
+                                pageRangeDisplayed={3}
+                                pageCount={trendingData?.total_pages}
+                                onPageChange={handleClick}
+                                breakClassName="breakline"
+                                breakLinkClassName="breakline_link"
+                                pageClassName="page_item"
+                                pageLinkClassName="page_item_link"
+                                activeClassName="page_item_active"
+                                activeLinkClassName="page_item_link_active"
+                                previousClassName="previous"
+                                nextClassName="next"
+                                containerClassName={'pagination'}
+                            />
+                        </div>
+                        
+                        
+                        
+                    </MainContainer>
+                </>
+                :
+                <div className="loading_div d-flex align-items-center justify-content-center">
+                    <span className="loader"></span>
                 </div>
-                
-                
-                
-            </MainContainer>
-            
+            }
         </>
     )
 }
@@ -192,11 +204,11 @@ export default Trending;
 
 
 // export async function getServerSideProps(){
-//     const responssMoviePopular = await fetch(`${enviourment.apiUrl}/movie/popular?api_key=${enviourment.tmdbApiKey}&page=2`);
-//     const MoviePopularData = await responssMoviePopular.json();
+//     const responssMoviePopular = await fetch(`${env.apiUrl}/movie/popular?api_key=${env.tmdbApiKey}&page=2`);
+//     const MovietrendingData = await responssMoviePopular.json();
 //     return{
 //       props:{
-//         MoviePopularData: MoviePopularData,
+//         MovietrendingData: MovietrendingData,
 //       }
 //     }
 //   }

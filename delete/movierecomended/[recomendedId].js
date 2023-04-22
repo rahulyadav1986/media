@@ -1,6 +1,6 @@
 import CircleRating from '@/components/shared/circleRating/circleRating';
 import MainContainer from '@/components/shared/mainContainer/mainContainer';
-import { enviourment } from 'next.config';
+import { env } from 'next.config';
 import Head from 'next/head';
 import Image from 'next/image';
 import Moment from 'react-moment';
@@ -37,11 +37,11 @@ const RecomemdedDetails = ({MovieDetails, MovieDetailsTrailer, MovieDetailsKeywo
             </Head>                
             <div className="inner_movie_hero_wrapper">
                     <>
-                        <Image className='backdrop' src={`${enviourment.image_base_url}/original${MovieDetails.backdrop_path}`} fill={true}  />
+                        <Image className='backdrop' src={`${env.image_base_url}/original${MovieDetails.backdrop_path}`} fill={true}  />
                         <MainContainer>
                             <div className="main_area_content d-flex justify-content-between">
                                 <div className="movie_avator_back">
-                                    <Image loading="lazy" alt={MovieDetails.title} src={`${enviourment.image_base_url}/w400${MovieDetails.poster_path}`} fill={true}  />
+                                    <Image loading="lazy" alt={MovieDetails.title} src={`${env.image_base_url}/w400${MovieDetails.poster_path}`} fill={true}  />
                                     <div className="movie_video_back d-flex align-items-center justify-content-center">
                                         <Image  onClick={() =>setTrailers(!trailers)} loading="lazy" alt="icon" src="/images/playvid.png" fill={true} />
                                     </div>
@@ -167,11 +167,11 @@ export default RecomemdedDetails
 
 export async function getServerSideProps(context){
     const {params} = context;
-    const responssMoviePopular = await fetch(`${enviourment.apiUrl}/movie/${params.recomendedId}?api_key=${enviourment.tmdbApiKey}`);
-    const responssMovieVideo = await fetch(`${enviourment.apiUrl}/movie/${params.recomendedId}/videos?api_key=${enviourment.tmdbApiKey}`);
-    const responssMovieKeywords = await fetch(`${enviourment.apiUrl}/movie/${params.recomendedId}/keywords?api_key=${enviourment.tmdbApiKey}`);
-    const responssMovieCredits = await fetch(`${enviourment.apiUrl}/movie/${params.recomendedId}/credits?api_key=${enviourment.tmdbApiKey}`);
-    const responssMovieRecomemded = await fetch(`${enviourment.apiUrl}/movie/${params.recomendedId}/recommendations?api_key=${enviourment.tmdbApiKey}`);
+    const responssMoviePopular = await fetch(`${env.apiUrl}/movie/${params.recomendedId}?api_key=${env.tmdbApiKey}`);
+    const responssMovieVideo = await fetch(`${env.apiUrl}/movie/${params.recomendedId}/videos?api_key=${env.tmdbApiKey}`);
+    const responssMovieKeywords = await fetch(`${env.apiUrl}/movie/${params.recomendedId}/keywords?api_key=${env.tmdbApiKey}`);
+    const responssMovieCredits = await fetch(`${env.apiUrl}/movie/${params.recomendedId}/credits?api_key=${env.tmdbApiKey}`);
+    const responssMovieRecomemded = await fetch(`${env.apiUrl}/movie/${params.recomendedId}/recommendations?api_key=${env.tmdbApiKey}`);
 
     const MoviePopularData = await responssMoviePopular.json();
     const MoviePopularTrailerData = await responssMovieVideo.json();

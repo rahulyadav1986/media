@@ -1,0 +1,86 @@
+.reviews_wrapper{
+    width: 100%;
+    .main_reviews_area{
+        background-color: var(--DarkColor);
+        .author_details{
+            padding-bottom: 3rem;
+            border-bottom: var(--SecondaryColor) 1px solid;
+        }
+        .author_head{
+            width: 100%;            
+            padding: 2rem;
+            border-bottom: var(--SecondaryColor) 1px solid;
+            img{
+                width: 5rem !important;
+                height: 5rem !important;
+                object-fit: cover;
+                border-radius: 100%;
+                margin-right: 8px;
+            }
+            h4{
+                font-weight: 400;
+                color: var(--PrimaryColor);
+                font-size: 18px;
+            }
+            p{
+                margin-bottom: 0;
+                font-size: 14px;
+            }
+        }
+        p{
+            font-size: 14px;
+            color: rgba(255,255,255,.7);
+            line-height: 24px;
+            margin-bottom: 2rem;
+        }
+        .content_details{
+            width: 100%;
+            padding: 2rem;
+            .star{
+                font-size: 14px;
+                img{
+                    margin-right: 8px;
+                }
+            }
+        }
+        .edit_details{
+            margin-top: 3rem;
+            li{
+                font-size: 14px;
+                background-color: var(--SecondaryColor);
+                padding: 1rem;
+                display: inline-block;
+                border-right: var(--DarkColor) 1px solid;
+                div{
+                    margin-top: 8px;
+                }
+                span{                    
+                    margin-right: 1rem;
+                    padding-right: 1rem;
+                }
+            }
+        }
+        
+    }
+    .more{
+        padding: 1rem;
+        background-color: var(--SecondaryColor);
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        cursor: pointer;
+        &.active{
+           img{
+            transform: rotate(0);
+           } 
+        }
+        img{
+            width: 16px !important;
+            height: 16px !important;
+            position: relative;
+            transform: rotate(180deg);
+            margin-left: 8px;
+            filter: brightness(0) invert(1);
+        }
+    }
+}

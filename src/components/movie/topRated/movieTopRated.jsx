@@ -4,7 +4,7 @@ import styles from './style.module.scss'
 import {HeadingLink} from '@/components/shared/headingLink/headingLink';
 import Image from 'next/image';
 import Link from 'next/link';
-import { enviourment } from 'next.config';
+import { env } from 'next.config';
 import CircleRating from '@/components/shared/circleRating/circleRating';
 import { useEffect, useState } from 'react';
 import { MovieSkeletonCard } from '@/components/shared/skeletons/skeletons';

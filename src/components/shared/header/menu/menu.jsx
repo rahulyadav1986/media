@@ -25,7 +25,7 @@ const Menu = ()=>{
         <>
             <ul className={`${styles.menu_wrapper} d-flex align-items-center`}>
                 <li onClick={togglemenu1}>
-                    Movies
+                    <Link href="/">Movies</Link>
                     {
                         submenu1 && <SubItem1 />   
                     }                    

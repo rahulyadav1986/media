@@ -3,7 +3,7 @@ import {HeadingLink} from '@/components/shared/headingLink/headingLink';
 import MainContainer from '@/components/shared/mainContainer/mainContainer';
 import Link from 'next/link';
 import Image from 'next/image';
-import { enviourment } from 'next.config';
+import { env } from 'next.config';
 import 'react-circular-progressbar/dist/styles.css';
 import CircleRating from '@/components/shared/circleRating/circleRating';
 import { MovieSkeletonCard } from '@/components/shared/skeletons/skeletons';
