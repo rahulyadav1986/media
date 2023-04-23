@@ -20,27 +20,40 @@ const TvRecomended = ({tvDetailsRecomemdedData})=>{
     return(
         <>
             <div className={`${styles.upcoming_wrapper} ptLarge `}>
-                
+                <h3>Recomended Tv Shows</h3>
                 {
                    tvDetailsRecomemdedData.results.length > 0 ?  
                    <>
-                        <h3>Recomended Tv Shows</h3>
-                            <div className={`${styles.main_wrapper} d-flex justify-content-between`}>                        
-                                    <div className={`${styles.details_area} d-flex scroll_area`}>
-                                        <Carousel breakPoints={breakPoints}>
-                                            {
-                                                tvDetailsRecomemdedData.results.map((item,i)=>{
-                                                    return(
-                                                        !loading ? <MovieSkeletonCard /> : <TvItem key={i} item = {item} />
-                                                    )
-                                                })
-                                            }
-                                        </Carousel>                            
-                                    </div>                        
-                            </div>
+                        <div className={`${styles.main_wrapper} d-flex justify-content-between`}>  
+                            {
+                                tvDetailsRecomemdedData.results.length < 5 ? 
+                                <div className="item_grid">
+                                    {
+                                        tvDetailsRecomemdedData.results.map((item,i)=>{
+                                            return(
+                                                !loading ? <MovieSkeletonCard /> : <TvItem key={i} item = {item} />
+                                            )
+                                        })
+                                    }
+                                </div>
+                                :
+                                <div className={`${styles.details_area} d-flex scroll_area`}>
+                                    <Carousel breakPoints={breakPoints}>
+                                        {
+                                            tvDetailsRecomemdedData.results.map((item,i)=>{
+                                                return(
+                                                    !loading ? <MovieSkeletonCard /> : <TvItem key={i} item = {item} />
+                                                )
+                                            })
+                                        }
+                                    </Carousel>                            
+                                </div>  
+                            }                      
+                                                  
+                        </div>
                    </>
                    :
-                   ""
+                   <div className="no-data">No Recomended Tv Shows Found</div>
                 }
                 
                 

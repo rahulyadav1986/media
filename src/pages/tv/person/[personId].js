@@ -1,16 +1,10 @@
-import CircleRating from '@/components/shared/circleRating/circleRating';
+
 import MainContainer from '@/components/shared/mainContainer/mainContainer';
 import { env } from 'next.config';
 import Head from 'next/head';
 import Image from 'next/image';
-import Moment from 'react-moment';
 import { useEffect, useState } from 'react';
-import Casting from '@/components/movie/casting/casting';
-import ReactPlayer from 'react-player/lazy'
-import MovieRecomended from '@/components/movie/recomended/recomended';
-import MovieSimilar from '@/components/movie/similar/similar';
 import styles from './styles.module.scss';
-import MovieItem from '@/components/movie/movieItem/movieItem';
 import { MovieSkeletonCard } from '@/components/shared/skeletons/skeletons';
 import Carousel from "react-elastic-carousel";
 import TvItem from '@/components/tv/tvItem/tvItem';
@@ -155,6 +149,21 @@ const CastDetails = ({CastDetailsData, PersonDetailsData})=>{
                                 :
                                 ""
                             }
+                            <li>
+                                <div className={styles.info_data}>
+                                    <h4>Total Tv Shows</h4>
+                                    <p>
+                                        {
+                                            CastDetailsData.cast.length > 0 ?
+                                            CastDetailsData.cast.length
+                                            :
+                                            0
+                                        }
+                                        
+                                    </p>
+                                </div>
+                            </li>
+                            
                         </ul>
                         
                         

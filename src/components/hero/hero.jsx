@@ -41,7 +41,7 @@ const Hero = ({HeroData})=>{
                                                  
                                             </li>
                                         </ul>
-                                        <Link href="/" className={`${styles.global_button} global_button`}>
+                                        <Link href= {`/movie/${item.id}`} className={`${styles.global_button} global_button`}>
                                             <Image loading="lazy" alt="icon" src="/images/play.png" fill={true} />
                                             watch now
                                         </Link>

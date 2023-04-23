@@ -15,7 +15,7 @@ const Header = ()=>{
                             <div className={styles.logo}>
                                 <Link href="/"><Image loading="lazy" alt="Madia" src="/images/logo.png" fill={true} /></Link>
                             </div>
-                            <Searchbar />
+                            {/* <Searchbar /> */}
                         </div>
                         <div className='d-flex align-items-center'>
                             <Menu />

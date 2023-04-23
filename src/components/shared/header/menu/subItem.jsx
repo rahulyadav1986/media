@@ -56,7 +56,7 @@ const SubItem3 = () =>{
                 </li>
                 <li>
                     <Link href="/tv/person">Tv</Link>
-                </li>                   
+                </li>       
             </ul>
         </>
     )

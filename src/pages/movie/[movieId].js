@@ -32,6 +32,7 @@ const PopularDetails = ({MovieDetails, MovieDetailsTrailer, MovieDetailsKeywords
       const backDrop = {
             backgroundImage: `url(${env.image_base_url}/original${MovieDetails.backdrop_path})`,
       }
+      
     
     return(
         <>

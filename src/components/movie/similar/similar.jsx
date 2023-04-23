@@ -19,11 +19,23 @@ const MovieSimilar = ({MovieDetailsSimilarData})=>{
       ];
     return(
         <>
-            {
-                MovieDetailsSimilarData.results.length > 0 ? 
-                <div className={`${styles.upcoming_wrapper} ptLarge `}>
-                    <h3>Similar Movies</h3>
-                    <div className={`${styles.main_wrapper} d-flex justify-content-between`}>                        
+            <div className={`${styles.upcoming_wrapper} ptLarge `}>
+                <h3>Similar Movies</h3>
+                {
+                    MovieDetailsSimilarData.results.length > 0 ?
+                    <div className={`${styles.main_wrapper} d-flex justify-content-between`}>
+                    {
+                        MovieDetailsSimilarData.results.length < 5 ?
+                        <div className="item_grid">
+                            {
+                                MovieDetailsSimilarData.results.map((item,i)=>{
+                                    return(
+                                        !loading ? <MovieSkeletonCard /> : <MovieItem key={i} item = {item} />
+                                    )
+                                })
+                            }
+                        </div>
+                        :
                         <div className={`${styles.details_area} d-flex scroll_area`}>
                             <Carousel breakPoints={breakPoints}>
                                 {
@@ -34,13 +46,15 @@ const MovieSimilar = ({MovieDetailsSimilarData})=>{
                                     })
                                 }
                             </Carousel>                            
-                        </div>                        
-                    </div>
+                        </div>
+                    }                        
+                                            
                 </div>
                 :
-                ""
+                <div className="no-data">No Similar Movies Found</div>
+                }
                 
-             }
+            </div>
         </>
     )
 }
