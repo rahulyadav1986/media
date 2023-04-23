@@ -21,7 +21,14 @@ const ReviewsItem = ({item})=>{
                 </div>
                 <div className={styles.content_details}>
                     <p>{item.content}</p>
-                    <div className={`${styles.star} d-flex align-items-center star`}><Image loading="lazy" src="/images/star.png" fill={true} alt="icon" /> {item.author_details.rating}/10</div>
+                    {
+                        item.author_details.rating !== null && item.author_details.rating !== "null" ?
+                        <div className={`${styles.star} d-flex align-items-center star`}>
+                            <Image loading="lazy" src="/images/star.png" fill={true} alt="icon" /> {item.author_details.rating}/10
+                        </div>
+                        :
+                        ""
+                    }
                     <ul className={`${styles.edit_details} d-flex`}>
                         <li className="d-flex align-items-center">
                             Created Date:

@@ -121,7 +121,7 @@ const Trending = ()=>{
                     <MainContainer>
                         <div className="row_movie_wrapper"> 
                             <div className="main_grid_wrapper">
-                                    <div className="d-flex align-items-center justify-content-end">
+                                    <div className="filter_tab_warp d-flex align-items-center justify-content-end">
                                         <ul className="filter_tab d-flex align-items-center">
                                             {
                                                 mainday.map((item,i)=>{

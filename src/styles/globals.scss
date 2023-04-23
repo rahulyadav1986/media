@@ -70,7 +70,7 @@ h1, h2, h3, h4, h5, h6, a{
 }
 img{
   position: relative !important;
-  width: auto !important;
+  width: 16px !important;
 }
 ul{
   list-style: none;
@@ -461,7 +461,7 @@ a{
   .main_area_content{
     width: 100%;
     position: relative;
-    z-index: 9;
+    z-index: 2;
     .movie_avator_back{
       flex: 0 0 25%;
       width: 25%;
@@ -888,6 +888,18 @@ a{
   }
 }
 
+@media only screen and (max-width:700px){
+  .inner_hero_bg {
+    h1{
+      text-align: center;
+    }
+  }
+  .filter_tab_warp{
+    justify-content: center !important;
+    margin-bottom: 4rem;
+  }
+}
+
 .row_movie_wrapper{
   width: 100%;
   padding-top: 0;
@@ -919,7 +931,7 @@ a{
     .card_wrapper{
       width: 100%;
       img{
-        width: 100% !important;
+        width: 100% ;
       }
       &.skel_portion{
         padding: 4rem 2rem 0 2rem;
@@ -1132,53 +1144,3 @@ a{
 }
 
 
-
-.results {
-  padding: 0;
-  margin: 0;
-  margin-top: 20px;
-}
-
-.results li {
-  list-style: none;
-}
-
-.result-card {
-  display: flex;
-  margin-bottom: 20px;
-}
-
-.result-card .poster-wrapper img,
-.filler-poster {
-  width: 75px;
-  height: 113px;
-  background-color: #dbdada;
-  border-radius: 5px;
-  margin-right: 15px;
-  display: block;
-  color: transparent;
-}
-
-.result-card .info {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.result-card .info .title {
-  font-size: 1.25rem;
-  color: var(--primary);
-  font-weight: 600;
-  margin: 0;
-}
-
-.result-card .info .release-date {
-  font-size: 1.25rem;
-  font-weight: 300;
-  color: var(--primary);
-  margin: 0;
-}
-
-.result-card .controls button {
-  margin-right: 10px;
-}
