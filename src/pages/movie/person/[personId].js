@@ -15,7 +15,7 @@ const CastDetails = ({CastDetailsData, PersonDetailsData})=>{
     const moreToggle = ()=>{
         setMore(!more)
     }
-    useMemo(()=>{
+    useEffect(()=>{
         setTimeout(() => setLoading(true), 2000);
     })
     const breakPoints = [
