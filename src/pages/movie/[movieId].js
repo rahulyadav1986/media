@@ -166,6 +166,7 @@ const PopularDetails = ({MovieDetails, MovieDetailsTrailer, MovieDetailsKeywords
                                                     url={`https://www.youtube.com/watch?v=${item.key}`} 
                                                     width='100%'
                                                     height='100%'
+                                                    config={{ youtube: { playerVars: { disablekb: 1 } } }}
                                                 />  
                                             </div>
                                             

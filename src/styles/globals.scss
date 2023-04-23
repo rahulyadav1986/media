@@ -145,10 +145,11 @@ a{
 
 
 .global_button{
-  font-size: 18px;
+  font-size: 16px;
   @extend .inline-flex;
   @extend .align-items-center;
   text-transform: capitalize;
+  line-height: 0;
   position: relative;
   &.small{
     font-size: 14px;
